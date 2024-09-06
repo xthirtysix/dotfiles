@@ -41,7 +41,7 @@ return {
             local lspconfig = require 'lspconfig'
 
             local lsps = {
-                [1] = 'tsserver',
+                [1] = 'ts_ls',
                 [2] = 'cssls',
                 [3] = 'html',
                 [4] = 'lwc_ls',
@@ -69,10 +69,7 @@ return {
             }
 
             -- typescript
-            local mason_registry = require 'mason-registry'
-            local vue_language_server_path = mason_registry.get_package('vue-language-server'):get_install_path()
-
-            lspconfig.tsserver.setup {
+            lspconfig.ts_ls.setup {
                 init_options = {
                     plugins = {
                         {
