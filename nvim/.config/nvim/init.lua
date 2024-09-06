@@ -48,4 +48,5 @@ vim.filetype.add {
 }
 
 require('lazy').setup 'plugins'
-require 'lua.configs.whichkey'
+require 'configs.keymaps'
+require 'configs.whichkey'
