@@ -1,8 +1,15 @@
 # dotfiles
 
+## Prerequisites
+GNU Stow is required
+
+### MacOS
+```sh
+brew install stow
+```
 ## Install
 ```sh
-stow -t ~ */
+stow -t ~ */ # stow everything inside dotfiles dir excluding README.md
 ```
 
 ## Screenshot
