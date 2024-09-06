@@ -49,12 +49,12 @@ require('which-key').add {
     },
     {
         '<leader>tf',
-        desc= 'Search by file name',
+        desc = 'Search by file name',
         icon = { icon = '', hl = 'WhichKeyNormal' },
     },
     {
         '<leader>tg',
-        desc= 'Grep by code',
+        desc = 'Grep by code',
         icon = { icon = '', hl = 'WhichKeyNormal' },
     },
     -- Harpoon
@@ -87,5 +87,21 @@ require('which-key').add {
         '<leader>hp',
         desc = 'Previous item',
         icon = { icon = '󰒮', hl = 'WhichKeyNormal' },
+    },
+    -- PX to REM
+    {
+        '<leader>p',
+        group = 'px->rem',
+        icon = { icon = '', hl = 'WhichKeyGroup' },
+    },
+    {
+        '<leader>px',
+        desc = 'Convert line to rem',
+        icon = { icon = '', hl = 'WhichKeyNormal' },
+    },
+    {
+        '<leader>pc',
+        desc = 'Convert to rem under cursor',
+        icon = { icon = '', hl = 'WhichKeyNormal' },
     },
 }
