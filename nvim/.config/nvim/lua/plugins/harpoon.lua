@@ -29,7 +29,7 @@ return {
             toggle_telescope(harpoon:list())
         end, { desc = 'Open harpoon window' })
         vim.keymap.set('n', '<leader>ha', function()
-            harpoon:list():append()
+            harpoon:list():add()
         end, { desc = 'Append item to harpoon list' })
         vim.keymap.set('n', '<leader>hr', function()
             harpoon:list():remove()

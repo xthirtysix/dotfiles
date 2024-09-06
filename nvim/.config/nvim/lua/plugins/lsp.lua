@@ -129,20 +129,21 @@ return {
                 enable_named_colors = true,
             }
 
-            vim.keymap.set('n', '<leader>dd', vim.diagnostic.open_float, opts)
+            -- Keymap
+            vim.keymap.set('n', '<leader>lh', vim.diagnostic.open_float, opts)
             vim.keymap.set('n', '<leader>ld', vim.lsp.buf.definition, { desc = 'Go to definition' })
             vim.keymap.set('n', '<leader>lD', vim.lsp.buf.declaration, { desc = 'Go to declaration' })
             vim.keymap.set(
                 { 'n' },
-                '<leader>ca',
+                '<leader>la',
                 vim.lsp.buf.code_action,
-                { desc = 'Display modal window with code action' }
+                { desc = 'Display code actions' }
             )
             vim.keymap.set(
                 'n',
                 '<leader>li',
                 vim.lsp.buf.hover,
-                { desc = 'Display info about keyword under the cursor' }
+                { desc = 'Display info under cursor' }
             )
         end,
     },

@@ -37,14 +37,15 @@ for index, value in pairs(options) do
     vim.opt[index] = value
 end
 
-vim.filetype.add({
-  extension = {
-    cls = 'apex',
-    apex = 'apex',
-    trigger = 'apex',
-    soql = 'soql',
-    sosl = 'sosl',
-  }
-})
+vim.filetype.add {
+    extension = {
+        cls = 'apex',
+        apex = 'apex',
+        trigger = 'apex',
+        soql = 'soql',
+        sosl = 'sosl',
+    },
+}
 
 require('lazy').setup 'plugins'
+require 'lua.configs.whichkey'
