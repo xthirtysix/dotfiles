@@ -3,10 +3,10 @@ return {
     event = 'VeryLazy',
     opts = {
         win = {
-            width = 50,
+            width = 36,
+            padding = { 1, 2 },
+            border = 'single', -- none, single, double, shadow
         },
-        padding = { 2, 2 },
-        border = 2,
         layout = {
             width = { min = 100 },
         },
