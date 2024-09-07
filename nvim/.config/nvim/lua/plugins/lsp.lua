@@ -125,23 +125,6 @@ return {
                 render = 'background', -- or 'foreground' or 'first_column'
                 enable_named_colors = true,
             }
-
-            -- Keymap
-            vim.keymap.set('n', '<leader>lh', vim.diagnostic.open_float, opts)
-            vim.keymap.set('n', '<leader>ld', vim.lsp.buf.definition, { desc = 'Go to definition' })
-            vim.keymap.set('n', '<leader>lD', vim.lsp.buf.declaration, { desc = 'Go to declaration' })
-            vim.keymap.set(
-                { 'n' },
-                '<leader>la',
-                vim.lsp.buf.code_action,
-                { desc = 'Display code actions' }
-            )
-            vim.keymap.set(
-                'n',
-                '<leader>li',
-                vim.lsp.buf.hover,
-                { desc = 'Display info under cursor' }
-            )
         end,
     },
 }
