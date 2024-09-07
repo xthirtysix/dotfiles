@@ -23,8 +23,8 @@ vim.keymap.set('n', '<leader>l', function()
     lint.try_lint()
 end, { desc = 'Lint current file' })
 
--- Oil
-vim.keymap.set('n', 'e', '<Cmd>Oil --float .. <CR>', { noremap = true })
+-- Mini files
+vim.keymap.set('n', 'e', '<Cmd>lua MiniFiles.open()<CR>', { noremap = true })
 
 -- Telescope
 local builtin = require 'telescope.builtin'
