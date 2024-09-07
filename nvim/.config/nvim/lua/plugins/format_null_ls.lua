@@ -39,7 +39,5 @@ return {
                 null_ls.builtins.completion.spell,
             },
         }
-
-        vim.keymap.set('n', '<leader>lf', vim.lsp.buf.format, { desc = 'Format file with none-ls' })
     end,
 }

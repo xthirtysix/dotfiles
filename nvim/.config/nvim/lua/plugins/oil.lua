@@ -191,5 +191,4 @@ return {
             },
         }
     end,
-    vim.keymap.set('n', 'e', '<Cmd>Oil --float .. <CR>', { buffer = 0 }),
 }
