@@ -1,6 +1,23 @@
 return {
     {
         'nvim-telescope/telescope.nvim',
+        keys = {
+
+            {
+                '<leader>tf',
+                function()
+                    require('telescope.builtin').find_files()
+                end,
+                desc = 'Search by file name',
+            },
+            {
+                '<leader>tg',
+                function()
+                    require('telescope.builtin').live_grep()
+                end,
+                desc = 'Grep code snippet',
+            },
+        },
         tag = '0.1.5',
         dependencies = { 'nvim-lua/plenary.nvim' },
         config = function()
