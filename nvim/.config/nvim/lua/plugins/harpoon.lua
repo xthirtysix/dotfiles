@@ -1,5 +1,44 @@
 return {
     'ThePrimeagen/harpoon',
+    keys = {
+
+        {
+            '<leader>ha',
+            function()
+                local harpoon = require 'harpoon'
+                harpoon:setup {}
+                harpoon:list():add()
+            end,
+            desc = 'Append to list',
+        },
+        {
+            '<leader>hr',
+            function()
+                local harpoon = require 'harpoon'
+                harpoon:setup {}
+                harpoon:list():remove()
+            end,
+            desc = 'Remove from list',
+        },
+        {
+            '<leader>hn',
+            function()
+                local harpoon = require 'harpoon'
+                harpoon:setup {}
+                harpoon:list():next()
+            end,
+            desc = 'Next file',
+        },
+        {
+            '<leader>hp',
+            function()
+                local harpoon = require 'harpoon'
+                harpoon:setup {}
+                harpoon:list():prev()
+            end,
+            desc = 'Previous file',
+        },
+    },
     branch = 'harpoon2',
     dependencies = { 'nvim-lua/plenary.nvim' },
     config = function()

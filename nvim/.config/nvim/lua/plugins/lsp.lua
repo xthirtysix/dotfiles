@@ -2,6 +2,13 @@
 return {
     {
         'neovim/nvim-lspconfig',
+        keys = {
+            { '<leader>lh', vim.diagnostic.open_float, desc = 'Diagnostics' },
+            { '<leader>ld', vim.lsp.buf.definition, desc = 'Go to definition' },
+            { '<leader>lD', vim.lsp.buf.declaration, desc = 'Go to declaration' },
+            { '<leader>la', vim.lsp.buf.code_action, desc = 'Code actions' },
+            { '<leader>li', vim.lsp.buf.hover, desc = 'Info under cursor' },
+        },
         dependencies = {
             {
                 'williamboman/mason.nvim',
