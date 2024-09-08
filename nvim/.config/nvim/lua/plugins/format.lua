@@ -2,7 +2,7 @@ return {
     'stevearc/conform.nvim',
     keys = {
 
-        { '<leader>lf', vim.lsp.buf.format, desc = 'Format file with none-ls' },
+        { '<leader>lf', vim.lsp.buf.format, desc = 'Format with null_ls' },
         {
             '<leader>f',
             function()
@@ -15,7 +15,7 @@ return {
                 }
             end,
             mode = { 'n', 'v' },
-            desc = 'Format file or range (in visual mode)',
+            desc = 'Format',
         },
     },
     event = { 'BufReadPre', 'BufNewFile' },
