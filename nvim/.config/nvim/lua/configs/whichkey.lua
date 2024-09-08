@@ -1,6 +1,11 @@
 require('which-key').add {
     -- Format
     {
+        '<leader>e',
+        desc = 'Explorer',
+        icon = { icon = '', hl = 'WhichKeyNormal' },
+    },
+    {
         '<leader>f',
         desc = 'Format code',
         icon = { icon = '󰉶', hl = 'WhichKeyNormal' },
