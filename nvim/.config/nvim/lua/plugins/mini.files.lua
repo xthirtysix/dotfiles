@@ -5,7 +5,7 @@ return {
             '<leader>e',
             '<Cmd>lua MiniFiles.open()<CR>',
             noremap = true,
-            desc = 'Open explorer',
+            desc = 'Explorer',
         },
     },
     version = false,
