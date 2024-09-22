@@ -3,6 +3,7 @@
 ####################################################
 [[ -f "${HOME}/Library/Application Support/amazon-q/shell/zshrc.pre.zsh" ]] && builtin source "${HOME}/Library/Application Support/amazon-q/shell/zshrc.pre.zsh"
 export TERM=xterm-256color-italic
+export LANG="en_US.UTF-8"
 export PATH="$PATH:$HOME/bin"
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/bin:/usr/local/bin:$PATH"
