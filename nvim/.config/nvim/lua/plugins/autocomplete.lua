@@ -8,6 +8,22 @@ return {
     version = 'v0.*',
 
     opts = {
+        keymap = {
+            show = '<C-e>',
+            hide = '<Tab>',
+            accept = '<CR>',
+            select_and_accept = {},
+            select_prev = { '<Up>', '<C-k>' },
+            select_next = { '<Down>', '<C-j>' },
+
+            show_documentation = '<C-e>',
+            hide_documentation = '<C-e>',
+            scroll_documentation_up = '<C-b>',
+            scroll_documentation_down = '<C-f>',
+
+            snippet_forward = '<Tab>',
+            snippet_backward = '<S-Tab>',
+        },
         highlight = {
             -- sets the fallback highlight groups to nvim-cmp's highlight groups
             -- useful for when your theme doesn't support blink.cmp
