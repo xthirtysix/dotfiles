@@ -3,7 +3,13 @@ return {
     name = 'catppuccin',
     priority = 1000,
     config = function()
-        vim.cmd 'colorscheme catppuccin'
+        require('nvim-treesitter.configs').setup {
+            highlight = {
+                enable = true,
+                additional_vim_regex_highlighting = false,
+            },
+        }
+        vim.cmd.colorscheme 'catppuccin-mocha'
     end,
 }
 
