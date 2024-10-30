@@ -1,11 +1,11 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
 format = """
-[](color_green)\
+[](color_blue)\
 $os\
-[█](bg:color_muted fg:color_green)\
+[█](bg:color_surface fg:color_blue)\
 $directory\
-[](fg:color_muted)\
+[](fg:color_surface)\
 $git_status\
 [](fg:color_cyan)\
 $c\
@@ -20,8 +20,23 @@ $python\
 [ ](fg:color_green)\
 $character"""
 
-palette = 'dragon'
+palette = 'mocha'
 
+[palettes.mocha]
+color_base = '#1e1e2e'
+color_surface = '#313244'
+color_overlay = '#45475a'
+color_muted = '#585b70'
+color_subtle = '#a6adc8'
+color_text = '#cdd6f4'
+color_pink = '#f5c2e7'
+color_yellow = '#f9e2af'
+color_orange = '#fab387'
+color_green = '#a6e3a1'
+color_cyan = '#89dceb'
+color_blue = '#b2beff'
+color_docker = '#1d90ed'
+color_hl_low = '#313244'
 [palettes.dragon]
 color_base = '#12120f'
 color_surface = '#181616'
@@ -40,7 +55,7 @@ color_hl_low = '#181616'
 
 [os]
 disabled = false
-style = "bg:color_green fg:color_base"
+style = "bg:color_blue fg:color_base"
 format = '[$symbol]($style)'
 
 [os.symbols]
@@ -71,7 +86,7 @@ style_root = "bg:color_yellow fg:color_text"
 format = '[ $user ]($style)'
 
 [directory]
-style = "fg:color_yellow bg:color_muted"
+style = "fg:color_text bg:color_surface"
 format = "[ $path]($style)"
 truncation_length = 3
 truncation_symbol = "…/"
