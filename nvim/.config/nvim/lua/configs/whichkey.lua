@@ -19,6 +19,10 @@ require('which-key').add {
         icon = { icon = '󰉶', hl = 'WhichKeyNormal' },
     },
     {
+        '<leader>le',
+        icon = { icon = '󰱺', hl = 'WhichKeyNormal' },
+    },
+    {
         '<leader>la',
         icon = { icon = '󱐋', hl = 'WhichKeyNormal' },
     },
