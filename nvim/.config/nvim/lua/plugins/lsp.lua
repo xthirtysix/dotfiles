@@ -27,7 +27,7 @@ return {
                     -- lua
                     'lua_ls',
                     -- js/ts
-                    'tsserver',
+                    'ts_ls',
                     'volar',
                     -- go
                     'gopls',
@@ -76,6 +76,15 @@ return {
             }
 
             -- typescript
+            local function organize_imports()
+                local params = {
+                    command = '_typescript.organizeImports',
+                    arguments = { vim.api.nvim_buf_get_name(0) },
+                    title = '',
+                }
+                vim.lsp.buf.execute_command(params)
+            end
+
             lspconfig.ts_ls.setup {
                 init_options = {
                     plugins = {
@@ -88,6 +97,12 @@ return {
                                 'vue',
                             },
                         },
+                    },
+                },
+                commands = {
+                    OrganizeImports = {
+                        organize_imports,
+                        description = 'Organize Imports',
                     },
                 },
                 filetypes = {
