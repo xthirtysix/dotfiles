@@ -6,16 +6,6 @@ return {
 
         null_ls.setup {
             sources = {
-                -- JS/TS
-                null_ls.builtins.formatting.prettier.with {
-                    filetypes = { 'js', 'html' },
-                    extra_filetypes = { 'apex', 'vue' },
-                    extra_args = {
-                        '--plugin=prettier-plugin-apex',
-                        '--write',
-                        '--single-attribute-per-line=""true"',
-                    },
-                },
                 null_ls.builtins.diagnostics.pmd.with {
                     filetypes = { 'apex' },
                     command = { 'pmd' },
@@ -35,7 +25,6 @@ return {
                 null_ls.builtins.formatting.stylua,
                 -- Common
                 null_ls.builtins.formatting.markdownlint,
-                null_ls.builtins.diagnostics.typos,
                 null_ls.builtins.completion.spell,
             },
         }

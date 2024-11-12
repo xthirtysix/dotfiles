@@ -9,20 +9,11 @@ return {
 
     opts = {
         keymap = {
-            show = '<C-e>',
-            hide = '<Tab>',
-            accept = '<CR>',
-            select_and_accept = {},
-            select_prev = { '<Up>', '<C-k>' },
-            select_next = { '<Down>', '<C-j>' },
-
-            show_documentation = '<C-e>',
-            hide_documentation = '<C-e>',
-            scroll_documentation_up = '<C-b>',
-            scroll_documentation_down = '<C-f>',
-
-            snippet_forward = '<Tab>',
-            snippet_backward = '<S-Tab>',
+            preset = 'default',
+            ['<C-k>'] = { 'select_prev', 'fallback' },
+            ['<C-j>'] = { 'select_next', 'fallback' },
+            ['<C-l>'] = { 'select_and_accept' },
+            ['<C-space>'] = { 'show', 'show_documentation', 'hide_documentation' },
         },
         highlight = {
             -- sets the fallback highlight groups to nvim-cmp's highlight groups
