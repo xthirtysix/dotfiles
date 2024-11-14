@@ -132,4 +132,22 @@ require('which-key').add {
         '<cmd>Trouble qflist toggle<cr>',
         desc = 'Quickfix List',
     },
+    -- HOP
+    {
+        '<leader>j',
+        group = 'hop to...',
+        icon = { icon = '󰑮', hl = 'WhichKeyGroup' },
+    },
+    {
+        '<leader>jj',
+        '<cmd>HopPattern<CR>',
+        desc = '...word',
+        icon = { icon = '', hl = 'WhWhichKeyNormal' },
+    },
+    {
+        '<leader>jl',
+        '<cmd>HopLineStart<CR>',
+        desc = '...line',
+        icon = { icon = '', hl = 'WhWhichKeyNormal' },
+    },
 }
