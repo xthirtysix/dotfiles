@@ -11,7 +11,7 @@ return {
                 conform.format {
                     lsp_fallback = true,
                     async = false,
-                    timeout_ms = 500,
+                    timeout_ms = 2500,
                 }
             end,
             mode = { 'n', 'v' },
@@ -19,6 +19,12 @@ return {
         },
     },
     event = { 'BufReadPre', 'BufNewFile' },
+    opts = {
+        format_on_save = {
+            timeout_ms = 2500,
+            lsp_fallback = true,
+        },
+    },
     config = function()
         local conform = require 'conform'
         conform.setup {
