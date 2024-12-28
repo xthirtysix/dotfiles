@@ -32,7 +32,7 @@ return {
                     lualine_y = {
                         {
                             'filetype',
-                            separator = { left = ' ', right = ' ' },
+                            separator = { left = '', right = ' ' },
                         },
                     },
                     lualine_z = {
