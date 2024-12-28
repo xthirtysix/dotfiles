@@ -1,0 +1,52 @@
+# Font
+font-family = JetBrainsMono NFM Regular
+font-size = 15
+font-thicken = false
+
+# JetBrains Mono Font Feature
+font-feature = zero
+font-feature = -cv01
+font-feature = -cv02
+font-feature = cv03
+font-feature = cv04
+font-feature = cv05
+font-feature = cv06
+font-feature = cv07
+font-feature = -cv08
+font-feature = -cv09
+font-feature = -cv10
+font-feature = cv11
+font-feature = cv12
+font-feature = -cv14
+font-feature = cv15
+font-feature = cv16
+font-feature = cv17
+font-feature = cv18
+
+# Window
+macos-titlebar-style = hidden
+quick-terminal-position = top
+quick-terminal-screen = mouse
+window-width = 300
+window-height = 100
+keybind = global:ctrl+`=toggle_quick_terminal
+
+# Behavior
+copy-on-select = true
+clipboard-paste-protection = false
+shell-integration = zsh
+quick-terminal-autohide = true
+
+# UI
+theme = catppuccin-mocha
+background = #181827
+cursor-color = #f38ba8
+cursor-style = block
+cursor-style-blink = false
+selection-background = #1d3c3b
+selection-foreground = #eeeeee
+adjust-underline-position = 40%
+adjust-underline-thickness = -60%
+confirm-close-surface = false
+unfocused-split-opacity = 1.0
+
