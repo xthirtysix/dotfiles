@@ -4,10 +4,10 @@ return {
         'neovim/nvim-lspconfig',
         keys = {
             { '<leader>lh', vim.diagnostic.open_float, desc = 'Diagnostics' },
-            { '<leader>ld', vim.lsp.buf.definition, desc = 'Go to definition' },
-            { '<leader>lD', vim.lsp.buf.declaration, desc = 'Go to declaration' },
-            { '<leader>la', vim.lsp.buf.code_action, desc = 'Code actions' },
-            { '<leader>li', vim.lsp.buf.hover, desc = 'Info under cursor' },
+            { '<leader>ld', vim.lsp.buf.definition,    desc = 'Go to definition' },
+            { '<leader>lD', vim.lsp.buf.declaration,   desc = 'Go to declaration' },
+            { '<leader>la', vim.lsp.buf.code_action,   desc = 'Code actions' },
+            { '<leader>li', vim.lsp.buf.hover,         desc = 'Info under cursor' },
         },
         dependencies = {
             {
@@ -101,6 +101,37 @@ return {
                 capabilities = capabilities,
             }
 
+            -- Vue
+            lspconfig.volar.setup {
+                init_options = {
+                    vue = {
+                        hybridMode = false,
+                    },
+                },
+                settings = {
+                    typescript = {
+                        inlayHints = {
+                            enumMemberValues = {
+                                enabled = true,
+                            },
+                            functionLikeReturnTypes = {
+                                enabled = true,
+                            },
+                            propertyDeclarationTypes = {
+                                enabled = true,
+                            },
+                            parameterTypes = {
+                                enabled = true,
+                                suppressWhenArgumentMatchesName = true,
+                            },
+                            variableTypes = {
+                                enabled = true,
+                            },
+                        },
+                    },
+                },
+            }
+
             -- Typescript
             lspconfig.ts_ls.setup {
                 init_options = {
@@ -113,6 +144,23 @@ return {
                     },
                 },
                 filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
+                settings = {
+                    typescript = {
+                        tsserver = {
+                            useSyntaxServer = false,
+                        },
+                        inlayHints = {
+                            includeInlayParameterNameHints = 'all',
+                            includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+                            includeInlayFunctionParameterTypeHints = true,
+                            includeInlayVariableTypeHints = true,
+                            includeInlayVariableTypeHintsWhenTypeMatchesName = true,
+                            includeInlayPropertyDeclarationTypeHints = true,
+                            includeInlayFunctionLikeReturnTypeHints = true,
+                            includeInlayEnumMemberValueHints = true,
+                        },
+                    },
+                },
                 handlers = handlers,
             }
 
