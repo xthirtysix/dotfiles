@@ -6,6 +6,9 @@ return {
 
         null_ls.setup {
             sources = {
+                null_ls.builtins.formatting.shfmt.with {
+                    extra_args = { '-ci', '-i=4' },
+                },
                 null_ls.builtins.diagnostics.pmd.with {
                     filetypes = { 'apex' },
                     command = { 'pmd' },

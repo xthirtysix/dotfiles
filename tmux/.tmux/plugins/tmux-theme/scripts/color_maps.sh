@@ -1,0 +1,31 @@
+set_theme() {
+    case $1 in
+        rosepine)
+            white=$rosepine_text
+            gray=$rosepine_surface
+            dark_gray=$rosepine_base
+            light_purple=$rosepine_rose
+            dark_purple=$rosepine_base
+            cyan=$rosepine_foam
+            green=$rosepine_love
+            light_green=$rosepine_pine
+            orange=$rosepine_gold
+            red=$rosepine_love
+            pink=$rosepine_rose
+            yellow=$rosepine_gold
+            ;;
+        dragon)
+            white=$old_white
+            gray=$dragon_black_4
+            dark_gray=$dragon_black_2
+            light_purple=$dragon_orange
+            dark_purple=$dragon_black_5
+            cyan=$dragon_teal
+            green=$dragon_ash
+            orange=$dragon_yellow
+            red=$dragon_red
+            pink=$dragon_orange
+            yellow=$dragon_yellow
+            ;;
+    esac
+}
