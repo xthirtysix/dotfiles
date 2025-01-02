@@ -20,7 +20,7 @@ $python\
 [ ](fg:color_green)\
 $character"""
 
-palette = 'mocha'
+palette = 'rosepine'
 
 [palettes.mocha]
 color_base = '#1e1e2e'
@@ -52,6 +52,22 @@ color_cyan = '#8ea4a2'
 color_blue = '#8992a7'
 color_docker = '#1d90ed'
 color_hl_low = '#181616'
+[palettes.rosepine]
+color_base = '#191724'
+color_surface = '#1f1d2e'
+color_overlay = '#26233a'
+color_muted = '#6e6a86'
+color_subtle = '#908caa'
+color_text = '#e0def4'
+color_pink = '#eb6f92'
+color_yellow = '#f6c177'
+color_orange = '#ebbcba'
+color_green = '#31748f'
+color_cyan = '#9ccfd8'
+color_blue = '#c4a7e7'
+color_docker = '#1d90ed'
+color_hl_low = '#21202e'
+
 
 [os]
 disabled = false
