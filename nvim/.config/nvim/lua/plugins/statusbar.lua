@@ -5,7 +5,7 @@ return {
         config = function()
             require('lualine').setup {
                 options = {
-                    theme = 'catppuccin',
+                    theme = 'rosepine',
                     component_separators = { left = '', right = '' },
                     section_separators = { left = '', right = '' },
                 },
@@ -15,11 +15,15 @@ return {
                             'mode',
                             fmt = function(mode)
                                 if mode:lower() == 'normal' then
-                                    return [[]]
+                                    return [[]]
                                 elseif mode:lower() == 'visual' then
                                     return [[]]
+                                elseif mode:lower() == 'v-block' then
+                                    return [[]]
                                 elseif mode:lower() == 'insert' then
                                     return [[]]
+                                elseif mode:lower() == 'command' then
+                                    return [[]]
                                 else
                                     return mode
                                 end
