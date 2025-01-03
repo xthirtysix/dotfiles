@@ -38,10 +38,10 @@ getChanges() {
     done
 
     output=""
-    [ $added -gt 0 ] && output+="${added}A"
-    [ $modified -gt 0 ] && output+=" ${modified}M"
-    [ $updated -gt 0 ] && output+=" ${updated}U"
-    [ $deleted -gt 0 ] && output+=" ${deleted}D"
+    [ $added -gt 0 ] && output+="[ ${added}]"
+    [ $modified -gt 0 ] && output+=" [ ${modified}]"
+    [ $updated -gt 0 ] && output+=" [ ${updated}]"
+    [ $deleted -gt 0 ] && output+=" [ ${deleted}]"
 
     echo $output
 }
@@ -132,23 +132,23 @@ getMessage() {
 
             if [ "${hide_status}" == "false" ]; then
                 if [ $(checkEmptySymbol $diff_symbol) == "true" ]; then
-                    output=$(echo "${changes} $branch")
+                    output=$(echo "$ICON ${changes} $branch")
                 else
-                    output=$(echo "$diff_symbol ${changes} $branch")
+                    output=$(echo "$ICON $diff_symbol ${changes} $branch")
                 fi
             else
                 if [ $(checkEmptySymbol $diff_symbol) == "true" ]; then
-                    output=$(echo "$branch")
+                    output=$(echo "$ICON $branch")
                 else
-                    output=$(echo "$diff_symbol $branch")
+                    output=$(echo "$ICON $diff_symbol $branch")
                 fi
             fi
 
         else
             if [ $(checkEmptySymbol $current_symbol) == "true" ]; then
-                output=$(echo "$branch")
+                output=$(echo "$ICON $branch")
             else
-                output=$(echo "$current_symbol $branch")
+                output=$(echo "$ICON $current_symbol $branch")
             fi
         fi
 
@@ -161,7 +161,7 @@ getMessage() {
 
 main() {
     path=$(getPaneDir)
-    echo "$ICON $(getMessage)"
+    echo "$(getMessage)"
 }
 
 #run main driver program
