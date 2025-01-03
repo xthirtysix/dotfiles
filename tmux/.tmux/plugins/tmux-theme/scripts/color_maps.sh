@@ -13,19 +13,7 @@ set_theme() {
             red=$rosepine_love
             pink=$rosepine_rose
             yellow=$rosepine_gold
-            ;;
-        dragon)
-            white=$old_white
-            gray=$dragon_black_4
-            dark_gray=$dragon_black_2
-            light_purple=$dragon_orange
-            dark_purple=$dragon_black_5
-            cyan=$dragon_teal
-            green=$dragon_ash
-            orange=$dragon_yellow
-            red=$dragon_red
-            pink=$dragon_orange
-            yellow=$dragon_yellow
+            blue=$rosepine_blue
             ;;
     esac
 }

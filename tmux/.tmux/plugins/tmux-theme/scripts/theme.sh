@@ -167,25 +167,21 @@ main() {
             fi
 
         elif [ $plugin = "git" ]; then
-            IFS=' ' read -r -a colors <<<$(get_tmux_option "@theme-git-colors" "green dark_gray")
+            IFS=' ' read -r -a colors <<<$(get_tmux_option "@theme-git-colors" "blue dark_gray")
             tmux set-option -g status-right-length 250
             script="#($current_dir/git.sh)"
 
         elif [ $plugin = "battery" ]; then
-            IFS=' ' read -r -a colors <<<$(get_tmux_option "@theme-battery-colors" "pink dark_gray")
+            IFS=' ' read -r -a colors <<<$(get_tmux_option "@theme-battery-colors" "cyan dark_gray")
             script="#($current_dir/battery.sh)"
 
         elif [ $plugin = "network" ]; then
-            IFS=' ' read -r -a colors <<<$(get_tmux_option "@theme-network-colors" "cyan dark_gray")
+            IFS=' ' read -r -a colors <<<$(get_tmux_option "@theme-network-colors" "pink dark_gray")
             script="#($current_dir/network.sh)"
 
         elif [ $plugin = "network-vpn" ]; then
             IFS=' ' read -r -a colors <<<$(get_tmux_option "@theme-network-vpn-colors" "cyan dark_gray")
             script="#($current_dir/network_vpn.sh)"
-
-        elif [ $plugin = "attached-clients" ]; then
-            IFS=' ' read -r -a colors <<<$(get_tmux_option "@theme-attached-clients-colors" "cyan dark_gray")
-            script="#($current_dir/attached_clients.sh)"
 
         elif [ $plugin = "spotify-tui" ]; then
             IFS=' ' read -r -a colors <<<$(get_tmux_option "@theme-spotify-tui-colors" "green dark_gray")
