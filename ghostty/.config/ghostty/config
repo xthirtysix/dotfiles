@@ -37,6 +37,7 @@ clipboard-paste-protection = false
 quick-terminal-autohide = true
 
 # UI
+theme = rose-pine
 background = #191724
 background-opacity = 0.92
 background-blur-radius = 20
