@@ -102,14 +102,14 @@ main() {
     bat_perc_num=${bat_perc%%%}
 
     if [ -z "$bat_stat" ]; then # Test if status is empty or not
-        if [ "$bat_perc_num" -le 75 ]; then
-            bat_label=''
-        elif [ "$bat_perc_num" -le 50 ]; then
-            bat_label=''
+        if [ "$bat_perc_num" -le 10 ]; then
+            bat_label=''
         elif [ "$bat_perc_num" -le 25 ]; then
             bat_label=''
-        elif [ "$bat_perc_num" -le 10 ]; then
-            bat_label=''
+        elif [ "$bat_perc_num" -le 50 ]; then
+            bat_label=''
+        elif [ "$bat_perc_num" -le 75 ]; then
+            bat_label=''
         fi
         echo "$bat_label  $bat_perc"
     elif [ -z "$bat_perc" ]; then # In case it is a desktop with no battery percent, only AC power
