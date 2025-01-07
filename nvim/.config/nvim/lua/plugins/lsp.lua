@@ -17,6 +17,7 @@ return {
             },
             { 'williamboman/mason-lspconfig.nvim' },
             { 'brenoprata10/nvim-highlight-colors' },
+            { 'saghen/blink.cmp' },
         },
         lazy = false,
         config = function()
@@ -62,14 +63,6 @@ return {
                 auto_install = true,
             }
 
-            require('cmp').setup {
-                sources = {
-                    { name = 'nvim_lsp' },
-                },
-            }
-
-            local capabilities = require('cmp_nvim_lsp').default_capabilities()
-
             local lspconfig = require 'lspconfig'
 
             local lsps = {
@@ -86,7 +79,7 @@ return {
             -- Setup LSP autocompletions and apply border styles
             for _, lsp in pairs(lsps) do
                 lspconfig[lsp].setup {
-                    capabilities = capabilities,
+                    capabilities = require('blink.cmp').get_lsp_capabilities(lspconfig[lsp].capabilities),
                     handlers = handlers,
                 }
             end
@@ -102,36 +95,36 @@ return {
             }
 
             -- Vue
-            lspconfig.volar.setup {
-                init_options = {
-                    vue = {
-                        hybridMode = false,
-                    },
-                },
-                settings = {
-                    typescript = {
-                        inlayHints = {
-                            enumMemberValues = {
-                                enabled = true,
-                            },
-                            functionLikeReturnTypes = {
-                                enabled = true,
-                            },
-                            propertyDeclarationTypes = {
-                                enabled = true,
-                            },
-                            parameterTypes = {
-                                enabled = true,
-                                suppressWhenArgumentMatchesName = true,
-                            },
-                            variableTypes = {
-                                enabled = true,
-                            },
-                        },
-                    },
-                },
-            }
-
+            -- lspconfig.volar.setup {
+            --     init_options = {
+            --         vue = {
+            --             hybridMode = false,
+            --         },
+            --     },
+            --     settings = {
+            --         typescript = {
+            --             inlayHints = {
+            --                 enumMemberValues = {
+            --                     enabled = true,
+            --                 },
+            --                 functionLikeReturnTypes = {
+            --                     enabled = true,
+            --                 },
+            --                 propertyDeclarationTypes = {
+            --                     enabled = true,
+            --                 },
+            --                 parameterTypes = {
+            --                     enabled = true,
+            --                     suppressWhenArgumentMatchesName = true,
+            --                 },
+            --                 variableTypes = {
+            --                     enabled = true,
+            --                 },
+            --             },
+            --         },
+            --     },
+            -- }
+            --
             -- Typescript
             lspconfig.ts_ls.setup {
                 init_options = {

@@ -32,24 +32,29 @@ return {
                     },
                     lualine_b = { { 'branch', icon = '' }, 'diff', 'diagnostics' },
                     lualine_c = { 'filename' },
-                    lualine_x = {},
+                    lualine_x = {
+                        {
+                            'harpoon2',
+                            icon = '⇁ ',
+                            indicators = { '1', '2', '3', '4' },
+                            active_indicators = { '1', '2', '3', '4' },
+                            color = {  fg = '#9ccfd8' },
+                            color_active = { fg = '#eb6f92' },
+                            _separator = ' ',
+                            no_harpoon = 'Harpoon not loaded',
+                        },
+                    },
                     lualine_y = {
                         {
                             'filetype',
                             separator = { left = '', right = ' ' },
                         },
                     },
-                    lualine_z = {
-                        {
-                            'location',
-                            color = { fg = '#cdd6f4', bg = '#181825' },
-                        },
-                    },
+                    lualine_z = { { 'location' } },
                 },
                 extensions = {
                     'lazy',
                     'mason',
-                    'nvim-tree',
                 },
             }
         end,
