@@ -29,7 +29,7 @@ quick-terminal-position = top
 quick-terminal-screen = mouse
 window-width = 100
 window-height = 35
-keybind = global:ctrl+`=toggle_quick_terminal
+keybind = global:ctrl+z=toggle_quick_terminal
 
 # Behavior
 copy-on-select = true
