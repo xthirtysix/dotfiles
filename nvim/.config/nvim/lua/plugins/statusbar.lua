@@ -36,12 +36,12 @@ return {
                         {
                             'harpoon2',
                             icon = '⇁ ',
-                            indicators = { '1', '2', '3', '4' },
-                            active_indicators = { '1', '2', '3', '4' },
+                            indicators = { 'q', 'w', 'e', 'r' },
+                            active_indicators = { 'Q', 'W', 'E', 'R' },
                             color = {  fg = '#9ccfd8' },
                             color_active = { fg = '#eb6f92' },
                             _separator = ' ',
-                            no_harpoon = 'Harpoon not loaded',
+                            no_harpoon = '...',
                         },
                     },
                     lualine_y = {

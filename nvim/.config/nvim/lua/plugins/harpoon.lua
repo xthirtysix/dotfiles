@@ -30,6 +30,42 @@ return {
             desc = 'List items',
         },
         {
+            '<leader>hq',
+            function()
+                local harpoon = require 'harpoon'
+                harpoon:setup {}
+                harpoon:list():select(1)
+            end,
+            desc = 'Select 1',
+        },
+        {
+            '<leader>hw',
+            function()
+                local harpoon = require 'harpoon'
+                harpoon:setup {}
+                harpoon:list():select(2)
+            end,
+            desc = 'Select 2',
+        },
+        {
+            '<leader>he',
+            function()
+                local harpoon = require 'harpoon'
+                harpoon:setup {}
+                harpoon:list():select(3)
+            end,
+            desc = 'Select 3',
+        },
+        {
+            '<leader>hr',
+            function()
+                local harpoon = require 'harpoon'
+                harpoon:setup {}
+                harpoon:list():select(4)
+            end,
+            desc = 'Select 4',
+        },
+        {
             '<leader>ha',
             function()
                 local harpoon = require 'harpoon'
@@ -39,13 +75,13 @@ return {
             desc = 'Append to list',
         },
         {
-            '<leader>hr',
+            '<leader>hd',
             function()
                 local harpoon = require 'harpoon'
                 harpoon:setup {}
                 harpoon:list():remove()
             end,
-            desc = 'Remove from list',
+            desc = 'Delete from list',
         },
         {
             '<leader>hn',
