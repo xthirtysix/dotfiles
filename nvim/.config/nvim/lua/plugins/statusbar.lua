@@ -1,11 +1,13 @@
 return {
     {
         'nvim-lualine/lualine.nvim',
-        dependencies = { 'nvim-tree/nvim-web-devicons' },
+        dependencies = {
+            { 'nvim-tree/nvim-web-devicons' },
+        },
         config = function()
+            require 'harpoon'
             require('lualine').setup {
                 options = {
-                    theme = 'rosepine',
                     component_separators = { left = '', right = '' },
                     section_separators = { left = '', right = '' },
                 },
@@ -28,29 +30,32 @@ return {
                                     return mode
                                 end
                             end,
+                            separator = { left = '  ', right = '' },
                         },
                     },
                     lualine_b = { { 'branch', icon = '' }, 'diff', 'diagnostics' },
-                    lualine_c = { 'filename' },
-                    lualine_x = {
+                    lualine_c = {
                         {
                             'harpoon2',
                             icon = '⇁ ',
                             indicators = { 'q', 'w', 'e', 'r' },
                             active_indicators = { 'Q', 'W', 'E', 'R' },
-                            color = {  fg = '#9ccfd8' },
+                            color = { fg = '#9ccfd8' },
                             color_active = { fg = '#eb6f92' },
-                            _separator = ' ',
+                            separator = { right = '' },
                             no_harpoon = '...',
                         },
                     },
+                    lualine_x = { 'filename' },
                     lualine_y = {
                         {
                             'filetype',
-                            separator = { left = '', right = ' ' },
+                            separator = { left = '', right = ' ' },
                         },
                     },
-                    lualine_z = { { 'location' } },
+                    lualine_z = {
+                        { 'location', separator = { right = '  ' } },
+                    },
                 },
                 extensions = {
                     'lazy',
