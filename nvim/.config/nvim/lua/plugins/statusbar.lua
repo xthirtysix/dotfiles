@@ -37,7 +37,7 @@ return {
                     lualine_c = {
                         {
                             'harpoon2',
-                            icon = '⇁ ',
+                            icon = ' ',
                             indicators = { 'q', 'w', 'e', 'r' },
                             active_indicators = { 'Q', 'W', 'E', 'R' },
                             color = { fg = '#9ccfd8' },

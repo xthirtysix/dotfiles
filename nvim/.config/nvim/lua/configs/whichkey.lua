@@ -64,15 +64,15 @@ require('which-key').add {
     },
     {
         '<leader>hl',
-        icon = { icon = '', hl = 'WhichKeyNormal' },
+        icon = { icon = '󰸕', hl = 'WhichKeyNormal' },
     },
     {
         '<leader>ha',
-        icon = { icon = '', hl = 'WhichKeyNormal' },
+        icon = { icon = '󰃅', hl = 'WhichKeyNormal' },
     },
     {
-        '<leader>hr',
-        icon = { icon = '', hl = 'WhichKeyNormal' },
+        '<leader>hd',
+        icon = { icon = '󰃆', hl = 'WhichKeyNormal' },
     },
     {
         '<leader>hn',
@@ -81,6 +81,22 @@ require('which-key').add {
     {
         '<leader>hp',
         icon = { icon = '󰒮', hl = 'WhichKeyNormal' },
+    },
+    {
+        '<leader>hq',
+        icon = { icon = '󰸖', hl = 'WhichKeyNormal' },
+    },
+    {
+        '<leader>hw',
+        icon = { icon = '󰸖', hl = 'WhichKeyNormal' },
+    },
+    {
+        '<leader>he',
+        icon = { icon = '󰸖', hl = 'WhichKeyNormal' },
+    },
+    {
+        '<leader>hr',
+        icon = { icon = '󰸖', hl = 'WhichKeyNormal' },
     },
     -- PX to REM
     {
