@@ -21,9 +21,9 @@ return {
                                 elseif mode:lower() == 'visual' then
                                     return [[]]
                                 elseif mode:lower() == 'v-block' then
-                                    return [[]]
+                                    return [[󱤢]]
                                 elseif mode:lower() == 'insert' then
-                                    return [[]]
+                                    return [[󱇧]]
                                 elseif mode:lower() == 'command' then
                                     return [[]]
                                 else
@@ -42,7 +42,6 @@ return {
                             active_indicators = { 'Q', 'W', 'E', 'R' },
                             color = { fg = '#9ccfd8' },
                             color_active = { fg = '#eb6f92' },
-                            separator = { right = '' },
                             no_harpoon = '...',
                         },
                     },
