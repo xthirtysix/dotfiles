@@ -2,7 +2,7 @@
 # Amazon Q pre block. Keep at the top of this file #
 ####################################################
 # [[ -f "${HOME}/Library/Application Support/amazon-q/shell/zshrc.pre.zsh" ]] && builtin source "${HOME}/Library/Application Support/amazon-q/shell/zshrc.pre.zsh"
-export TERM=xterm-256color-italic
+export TERM="xterm-256color"
 export LANG="en_US.UTF-8"
 export PATH="$PATH:$HOME/bin"
 export PATH="$HOME/.local/bin:$PATH"
@@ -11,13 +11,18 @@ export PATH="$PATH:/opt/homebrew/bin"
 export GOPATH="$HOME/Projects/go"
 export PATH="$PATH:$GOPATH/src"
 export PATH="$PATH:$HOME/.spoof-dpi/bin"
+export LG_WEBOS_STUDIO_SDK_HOME="$HOME/.nvm/versions/node/v20.14.0/lib/node_modules/@webos-tools"
+export WEBOS_CLI_TV="$PATH:$HOME/.nvm/versions/node/v20.14.0/lib/node_modules/@webos-tools/cli/bin"
+export LG_WEBOS_TV_SDK_HOME="$HOME/.nvm/versions/node/v20.14.0/lib/node_modules/@webos-tools"
+
+autoload -U compinit; compinit
+source ~/.fzf-tab/fzf-tab.plugin.zsh
 
 #######
 # nvm #
 #######
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 
 ########
 # pnpm #
@@ -35,7 +40,6 @@ export PATH="$PNPM_HOME:$PATH"
 # created by Zap installer #
 ############################
 [ -f "$HOME/.local/share/zap/zap.zsh" ] && source "$HOME/.local/share/zap/zap.zsh"
-plug "Aloxaf/fzf-tab"                           # Replaces zsh tab autocompletion with fzf
 plug "zsh-users/zsh-autosuggestions"            # Suggests input completion
 plug "zsh-users/zsh-syntax-highlighting"        # Highlights valid/invalid input
 plug "zap-zsh/vim"                              # Uses vim navigation
