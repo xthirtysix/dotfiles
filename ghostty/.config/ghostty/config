@@ -4,24 +4,62 @@ font-size = 15
 font-thicken = false
 
 # JetBrains Mono Font Feature
+# Contains all ligatures. Substitution for : between digits.
+font-feature = calt
+# Changes 0 to slashed variant.
 font-feature = zero
+# Substitute digits in fraction sequences to look more like fractions.
+font-feature = -frac
+
+#Classic construction. JetBrains Mono but even more neutral. Performs better in big paragraph of text.
+font-feature = -ss01
+# Closed construction. Change the rhythm to a more lively one.
+font-feature = -ss02
+# Adds gaps in ≠ ≠= == === ligatures.
+font-feature = -ss19
+# Shift horizontal stroke in f to match x-height.
+font-feature = -ss20
+
+# l with symmetrical lower stroke.
 font-feature = -cv01
+# t with curly tail.
 font-feature = -cv02
+# g with more complex construction.
 font-feature = cv03
+# j with curly descender.
 font-feature = cv04
+# l with curly tail.
 font-feature = cv05
+# m with shorter leg.
 font-feature = cv06
+# W w with lover middle connection.
 font-feature = cv07
-font-feature = -cv08
+# K k with sharp connection.
+font-feature = cv08
+# f with additional horizontal stroke.
 font-feature = -cv09
+# r with more open construction.
 font-feature = -cv10
+# y with different ascender construction.
 font-feature = cv11
+# u with traditional construction.
 font-feature = cv12
+# $ with broken bar.
 font-feature = -cv14
-font-feature = cv15
+# alternate &.
+font-feature = -cv15
+# Q with bent tail.
 font-feature = cv16
+# f with curly ascender.
 font-feature = cv17
+# alternate 2 6 9 .
 font-feature = cv18
+# old construction of 8.
+font-feature = -cv19
+# old construction of 5.
+font-feature = -cv20
+# Highlights Cyrillic С с for debugging purposes.
+font-feature = -cv99
 
 # Window
 macos-titlebar-style = hidden
