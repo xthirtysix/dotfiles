@@ -32,7 +32,6 @@ return {
             ['<C-j>'] = { 'select_next', 'fallback' },
             ['<C-p>'] = { 'select_prev', 'fallback' },
             ['<C-n>'] = { 'select_next', 'fallback' },
-
             ['<C-d>'] = { 'scroll_documentation_up', 'fallback' },
             ['<C-f>'] = { 'scroll_documentation_down', 'fallback' },
         },
@@ -77,8 +76,10 @@ return {
             documentation = {
                 auto_show = true,
                 auto_show_delay_ms = 500,
+                window = { border = 'single' },
             },
             menu = {
+                border = 'single',
                 draw = {
                     columns = { { 'label', gap = 2 }, { 'kind_icon', 'kind', gap = 1 } },
                     components = {
