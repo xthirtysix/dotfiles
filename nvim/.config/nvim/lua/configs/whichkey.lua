@@ -8,6 +8,24 @@ require('which-key').add {
         '<leader>f',
         icon = { icon = '󰉶', hl = 'WhichKeyNormal' },
     },
+    {
+        '<leader><space>',
+        function()
+            Snacks.picker.smart {
+                title = '󰥨 Find files',
+            }
+        end,
+        desc = 'Find files',
+        icon = { icon = '󰥨', hl = 'WhichKeyNormal' },
+    },
+    {
+        '<leader>/',
+        function()
+            Snacks.picker.grep { title = '󰺯 Find in files ' }
+        end,
+        desc = 'Find in files',
+        icon = { icon = '󰺯', hl = 'WhichKeyNormal' },
+    },
     -- LSP
     {
         '<leader>l',
@@ -34,27 +52,47 @@ require('which-key').add {
         '<leader>lh',
         icon = { icon = '', hl = 'WhichKeyNormal' },
     },
+    -- LSP go to
     {
-        '<leader>ld',
+        'gd',
+        function()
+            Snacks.picker.lsp_definitions()
+        end,
+        desc = 'Go to Definition',
+        icon = { icon = '󰈞', hl = 'WhichKeyNormal' },
+    },
+    {
+        'gD',
+        function()
+            Snacks.picker.lsp_declarations()
+        end,
+        desc = 'Go to Declaration',
+        icon = { icon = '󰈞', hl = 'WhichKeyNormal' },
+    },
+    {
+        'gr',
+        function()
+            Snacks.picker.lsp_references()
+        end,
+        nowait = true,
+        desc = 'Go to References',
         icon = { icon = '', hl = 'WhichKeyNormal' },
     },
     {
-        '<leader>lD',
-        icon = { icon = '', hl = 'WhichKeyNormal' },
-    },
-    -- Telescope
-    {
-        '<leader>t',
-        group = 'Telescope',
-        icon = { icon = '', hl = 'WhichKeyGroup' },
+        'gI',
+        function()
+            Snacks.picker.lsp_implementations()
+        end,
+        desc = 'Go to Implementation',
+        icon = { icon = '󰈞', hl = 'WhichKeyNormal' },
     },
     {
-        '<leader>tf',
-        icon = { icon = '', hl = 'WhichKeyNormal' },
-    },
-    {
-        '<leader>tg',
-        icon = { icon = '', hl = 'WhichKeyNormal' },
+        'gy',
+        function()
+            Snacks.picker.lsp_type_definitions()
+        end,
+        desc = 'Goto T[y]pe Definition',
+        icon = { icon = '󰈞', hl = 'WhichKeyNormal' },
     },
     -- Harpoon
     {
@@ -165,5 +203,59 @@ require('which-key').add {
         '<cmd>HopLineStart<CR>',
         desc = '...line',
         icon = { icon = '', hl = 'WhWhichKeyNormal' },
+    },
+    -- GIT
+    {
+        '<leader>g',
+        group = 'git',
+        icon = { icon = '', hl = 'WhichKeyGroup' },
+    },
+    {
+        '<leader>gg',
+        function()
+            Snacks.lazygit.open()
+        end,
+        desc = 'Lazygit',
+        icon = { icon = '', hl = 'WhichKeyNormal' },
+    },
+    {
+        '<leader>gs',
+        function()
+            Snacks.picker.git_status()
+        end,
+        desc = 'Git Status',
+        icon = { icon = '', hl = 'WhichKeyNormal' },
+    },
+    {
+        '<leader>gd',
+        function()
+            Snacks.picker.git_diff()
+        end,
+        desc = 'Git Diff',
+        icon = { icon = '', hl = 'WhichKeyNormal' },
+    },
+    {
+        '<leader>gl',
+        function()
+            Snacks.picker.git_log()
+        end,
+        desc = 'Git Log',
+        icon = { icon = '', hl = 'WhichKeyNormal' },
+    },
+    {
+        '<leader>gL',
+        function()
+            Snacks.picker.git_log_line()
+        end,
+        desc = 'Git Log Line',
+        icon = { icon = '', hl = 'WhichKeyNormal' },
+    },
+    {
+        '<leader>gf',
+        function()
+            Snacks.picker.git_log_file()
+        end,
+        desc = 'Git Log File',
+        icon = { icon = '', hl = 'WhichKeyNormal' },
     },
 }
