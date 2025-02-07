@@ -7,28 +7,38 @@ return {
         {
             '<leader>hl',
             function()
+                local Snacks = require 'snacks'
                 local harpoon = require 'harpoon'
                 harpoon:setup {}
 
-                local conf = require('telescope.config').values
-                local function toggle_telescope(harpoon_files)
-                    local file_paths = {}
-                    for _, item in ipairs(harpoon_files.items) do
-                        table.insert(file_paths, item.value)
-                    end
-
-                    require('telescope.pickers')
-                        .new({}, {
-                            prompt_title = 'Harpoon',
-                            finder = require('telescope.finders').new_table {
-                                results = file_paths,
-                            },
-                            previewer = conf.file_previewer {},
-                            sorter = conf.generic_sorter {},
-                        })
-                        :find()
+                local file_paths = {}
+                for _, item in ipairs(harpoon:list().items) do
+                    table.insert(file_paths, item.value)
                 end
-                toggle_telescope(harpoon:list())
+
+                if #file_paths <= 0 then
+                    return nil
+                end
+
+                return Snacks.picker.pick('files', {
+                    dirs = file_paths,
+                    layout = {
+                        layout = {
+                            backdrop = false,
+                            width = 0.5,
+                            min_width = 80,
+                            height = 0.8,
+                            min_height = 30,
+                            box = 'vertical',
+                            border = 'rounded',
+                            title = 'Harpoon ⇁',
+                            title_pos = 'center',
+                            { win = 'input', height = 1, border = 'bottom' },
+                            { win = 'list', height = 0.15, border = 'none' },
+                            { win = 'preview', title = '{preview}', border = 'top' },
+                        },
+                    },
+                })
             end,
             desc = 'List items',
         },
