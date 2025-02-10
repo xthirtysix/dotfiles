@@ -45,7 +45,7 @@ return {
             default = { 'lsp', 'path', 'snippets', 'buffer' },
         },
 
-        signature = { enabled = true },
+        signature = { enabled = true, window = { border = 'single' } },
 
         completion = {
             accept = {

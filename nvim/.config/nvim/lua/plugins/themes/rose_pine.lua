@@ -53,6 +53,7 @@ return {
             highlight_groups = {
                 Whitespace = { fg = 'highlight_med' },
                 VertSplit = { fg = 'muted', bg = 'muted' },
+                NotifyBackground = { bg = 'surface' },
             },
         }
 

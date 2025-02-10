@@ -2,7 +2,7 @@
 return {
     'ThePrimeagen/harpoon',
     branch = 'harpoon2',
-    dependencies = { 'nvim-lua/plenary.nvim', 'letieu/harpoon-lualine' },
+    dependencies = { 'nvim-lua/plenary.nvim', 'letieu/harpoon-lualine', 'rcarriga/nvim-notify' },
     keys = {
         {
             '<leader>hl',
@@ -17,7 +17,7 @@ return {
                 end
 
                 if #file_paths <= 0 then
-                    return nil
+                    return require 'notify'(" Nothing's harpooned", 'warn', { title = 'Harpoon ⇁ ' })
                 end
 
                 return Snacks.picker.pick('files', {
