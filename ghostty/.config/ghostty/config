@@ -77,7 +77,7 @@ quick-terminal-autohide = true
 # UI
 theme = rose-pine
 background = #191724
-background-opacity = 0.92
+background-opacity = 0.98
 background-blur-radius = 20
 cursor-color = #f38ba8
 cursor-style = block
