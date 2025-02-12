@@ -1,4 +1,5 @@
 return {
+
     {
         'nvim-lualine/lualine.nvim',
         dependencies = {
@@ -10,6 +11,7 @@ return {
                 options = {
                     component_separators = { left = '', right = '' },
                     section_separators = { left = '', right = '' },
+                    theme = 'rose-pine',
                 },
                 sections = {
                     lualine_a = {
