@@ -57,8 +57,6 @@ return {
                     'lua_ls',
                     'ts_ls',
                     'volar',
-                    'gopls',
-                    'apex_ls',
                 },
                 auto_install = true,
             }
@@ -69,11 +67,8 @@ return {
                 [1] = 'ts_ls',
                 [2] = 'cssls',
                 [3] = 'html',
-                [4] = 'lwc_ls',
-                [5] = 'gopls',
-                [6] = 'lua_ls',
-                [7] = 'volar',
-                [8] = 'apex_ls',
+                [4] = 'lua_ls',
+                [5] = 'volar',
             }
 
             -- Setup LSP autocompletions and apply border styles
@@ -85,14 +80,14 @@ return {
             end
 
             -- Salesforce
-            lspconfig.apex_ls.setup {
-                apex_enable_semantic_errors = false,
-                apex_enable_completion_statistics = false,
-                filetypes = { 'apex' },
-                root_dir = lspconfig.util.root_pattern 'sfdx-project.json',
-                on_attach = on_attach,
-                capabilities = capabilities,
-            }
+            -- lspconfig.apex_ls.setup {
+            --     apex_enable_semantic_errors = false,
+            --     apex_enable_completion_statistics = false,
+            --     filetypes = { 'apex' },
+            --     root_dir = lspconfig.util.root_pattern 'sfdx-project.json',
+            --     on_attach = on_attach,
+            --     capabilities = capabilities,
+            -- }
 
             -- Vue
             -- lspconfig.volar.setup {

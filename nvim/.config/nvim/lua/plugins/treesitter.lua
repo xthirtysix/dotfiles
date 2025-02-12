@@ -6,7 +6,7 @@ return {
         config = function()
             local configs = require 'nvim-treesitter.configs'
             configs.setup {
-                ensure_installed = { 'lua', 'go', 'javascript', 'html', 'css', 'apex', 'vue' },
+                ensure_installed = { 'lua', 'javascript', 'html', 'css', 'vue' },
                 highlight = { enable = true },
                 indent = { enable = true },
                 autotag = {
