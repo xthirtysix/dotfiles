@@ -258,4 +258,31 @@ require('which-key').add {
         desc = 'Git Log File',
         icon = { icon = '', hl = 'WhichKeyNormal' },
     },
+    {
+
+        '<leader>gj',
+        function()
+            local gitsigns = require 'gitsigns'
+            if vim.wo.diff then
+                vim.cmd.normal { ']c', bang = true }
+            else
+                gitsigns.nav_hunk 'next'
+            end
+        end,
+        desc = 'Git next change',
+        icon = { icon = '', hl = 'WhichKeyNormal' },
+    },
+    {
+        '<leader>gk',
+        function()
+            local gitsigns = require 'gitsigns'
+            if vim.wo.diff then
+                vim.cmd.normal { '[c', bang = true }
+            else
+                gitsigns.nav_hunk 'prev'
+            end
+        end,
+        desc = 'Git prev change',
+        icon = { icon = '', hl = 'WhichKeyNormal' },
+    }
 }
