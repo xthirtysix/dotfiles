@@ -1,11 +1,22 @@
 return {
-
     {
         'nvim-lualine/lualine.nvim',
         dependencies = {
             { 'nvim-tree/nvim-web-devicons' },
+            { 'arkav/lualine-lsp-progress' },
         },
         config = function()
+            local function diff_source()
+                local gitsigns = vim.b.gitsigns_status_dict
+                if gitsigns then
+                    return {
+                        added = gitsigns.added,
+                        modified = gitsigns.changed,
+                        removed = gitsigns.removed,
+                    }
+                end
+            end
+
             require 'harpoon'
             require('lualine').setup {
                 options = {
@@ -35,7 +46,19 @@ return {
                             separator = { left = '  ', right = '' },
                         },
                     },
-                    lualine_b = { { 'branch', icon = '' }, 'diff', 'diagnostics' },
+                    lualine_b = {
+                        { 'b:gitsigns_head', icon = '' },
+                        {
+                            'diff',
+                            source = diff_source,
+                            symbols = {
+                                added = ' ',
+                                modified = ' ',
+                                removed = ' ',
+                            },
+                        },
+                        'diagnostics',
+                    },
                     lualine_c = {
                         {
                             'harpoon2',
@@ -47,7 +70,32 @@ return {
                             no_harpoon = '...',
                         },
                     },
-                    lualine_x = { 'filename' },
+                    lualine_x = {
+                        {
+                            'lsp_progress',
+                            separators = {
+                                component = ' ',
+                                progress = ' | ',
+                                message = { pre = '(', post = ')' },
+                                percentage = { pre = '', post = '%% ' },
+                                title = { pre = '', post = ': ' },
+                                lsp_client_name = { pre = '[', post = ']' },
+                                spinner = { pre = '', post = '' },
+                            },
+                            display_components = { 'lsp_client_name', 'spinner', { 'percentage' } },
+                            timer = { progress_enddelay = 500, spinner = 1000, lsp_client_name_enddelay = 1000 },
+                            spinner_symbols = { '🌑 ', '🌒 ', '🌓 ', '🌔 ', '🌕 ', '🌖 ', '🌗 ', '🌘 ' },
+                        },
+                        {
+                            'filename',
+                            symbols = {
+                                modified = '󱇨 ', -- Text to show when the file is modified.
+                                readonly = '󱀰 ', -- Text to show when the file is non-modifiable or readonly.
+                                unnamed = '󱀶 ', -- Text to show for unnamed buffers.
+                                newfile = '󰻭 ', -- Text to show for newly created file before first write
+                            },
+                        },
+                    },
                     lualine_y = {
                         {
                             'filetype',
@@ -55,12 +103,13 @@ return {
                         },
                     },
                     lualine_z = {
-                        { 'location', separator = { right = '  ' } },
+                        { 'location', icon = '', separator = { right = ' ' } },
                     },
                 },
                 extensions = {
                     'lazy',
                     'mason',
+                    'trouble',
                 },
             }
         end,

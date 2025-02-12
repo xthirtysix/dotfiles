@@ -15,7 +15,7 @@ local options = {
         trail = '~',
         extends = '>',
         precedes = '<',
-        space = '·',
+        -- space = '·',
     },
 }
 
