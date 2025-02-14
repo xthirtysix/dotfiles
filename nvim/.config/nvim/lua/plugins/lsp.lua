@@ -4,10 +4,10 @@ return {
         'neovim/nvim-lspconfig',
         keys = {
             { '<leader>lh', vim.diagnostic.open_float, desc = 'Diagnostics' },
-            { '<leader>ld', vim.lsp.buf.definition,    desc = 'Go to definition' },
-            { '<leader>lD', vim.lsp.buf.declaration,   desc = 'Go to declaration' },
-            { '<leader>la', vim.lsp.buf.code_action,   desc = 'Code actions' },
-            { '<leader>li', vim.lsp.buf.hover,         desc = 'Info under cursor' },
+            { '<leader>ld', vim.lsp.buf.definition, desc = 'Go to definition' },
+            { '<leader>lD', vim.lsp.buf.declaration, desc = 'Go to declaration' },
+            { '<leader>la', vim.lsp.buf.code_action, desc = 'Code actions' },
+            { '<leader>li', vim.lsp.buf.hover, desc = 'Info under cursor' },
         },
         dependencies = {
             {
@@ -16,7 +16,6 @@ return {
                 opts = {},
             },
             { 'williamboman/mason-lspconfig.nvim' },
-            { 'brenoprata10/nvim-highlight-colors' },
             { 'saghen/blink.cmp' },
         },
         lazy = false,
@@ -152,10 +151,9 @@ return {
                 handlers = handlers,
             }
 
-            -- Highlight CSS colors
-            require('nvim-highlight-colors').setup {
-                render = 'background', -- or 'foreground' or 'first_column'
-                enable_named_colors = true,
+            -- SCSS
+            lspconfig.somesass_ls.setup {
+                filetypes = { 'sass', 'scss', 'less', 'css' },
             }
 
             -- Custom sidebar icons
