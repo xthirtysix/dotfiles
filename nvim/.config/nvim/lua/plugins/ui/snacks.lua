@@ -10,9 +10,14 @@ return {
         lazygit = {},
         -- indeint higlihgt
         indent = {
+            indent = {
+                only_scope = true,
+                only_current = true,
+            },
             scope = {
                 enabled = true,
-                hl = 'Comment',
+                -- hl = 'Comment',
+                hl = 'IndentBlanklineChar',
             },
             chunk = {
                 enabled = false,
@@ -23,6 +28,13 @@ return {
                     horizontal = '─',
                     vertical = '│',
                     arrow = '─',
+                },
+            },
+            animate = {
+                style = 'out',
+                duration = {
+                    step = 20, -- ms per step
+                    total = 1000, -- maximum duration
                 },
             },
         },
