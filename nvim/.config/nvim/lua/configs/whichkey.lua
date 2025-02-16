@@ -33,6 +33,16 @@ require('which-key').add {
         icon = { icon = '', hl = 'WhichKeyGroup' },
     },
     {
+        '<leader>ld',
+        desc = 'Definition',
+        icon = { icon = '󰫧', hl = 'WhichKeyNormal' },
+    },
+    {
+        '<leader>lt',
+        desc = 'Type definition',
+        icon = { icon = '', hl = 'WhichKeyNormal' },
+    },
+    {
         '<leader>lf',
         icon = { icon = '󰉶', hl = 'WhichKeyNormal' },
     },
@@ -284,5 +294,5 @@ require('which-key').add {
         end,
         desc = 'Git prev change',
         icon = { icon = '', hl = 'WhichKeyNormal' },
-    }
+    },
 }

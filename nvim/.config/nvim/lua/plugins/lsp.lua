@@ -1,12 +1,26 @@
 ---@diagnostic disable: undefined-global
 return {
     {
+        'nvimdev/lspsaga.nvim',
+        config = function()
+            require('lspsaga').setup {}
+        end,
+        dependencies = {
+            'nvim-treesitter/nvim-treesitter', -- optional
+            'nvim-tree/nvim-web-devicons', -- optional
+        },
+        keys = {
+            { '<leader>ld', '<cmd>Lspsaga peek_definition<cr>', desc = 'Definition', mode = 'n' },
+            { '<leader>lt', '<cmd>Lspsaga peek_type_definition<cr>', desc = 'Type definition', mode = 'n' },
+            { '<leader>la', '<cmd>Lspsaga code_action<cr>', desc = 'Code actions' },
+            { '<leader>lh', '<cmd>Lspsaga show_cursor_diagnostics<cr>', desc = 'Diagnostics' },
+        },
+    },
+    {
         'neovim/nvim-lspconfig',
         keys = {
-            { '<leader>lh', vim.diagnostic.open_float, desc = 'Diagnostics' },
             { '<leader>ld', vim.lsp.buf.definition, desc = 'Go to definition' },
             { '<leader>lD', vim.lsp.buf.declaration, desc = 'Go to declaration' },
-            { '<leader>la', vim.lsp.buf.code_action, desc = 'Code actions' },
             { '<leader>li', vim.lsp.buf.hover, desc = 'Info under cursor' },
         },
         dependencies = {
