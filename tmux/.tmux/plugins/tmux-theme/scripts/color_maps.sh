@@ -15,5 +15,20 @@ set_theme() {
             yellow=$rosepine_gold
             blue=$rosepine_blue
             ;;
+        nordfox)
+            white=$nordfox_text
+            gray=$nordfox_bg1
+            dark_gray=$nordfox_bg0
+            light_purple=$nordfox_magenta
+            dark_purple=$nordfox_bg0
+            cyan=$nordfox_green
+            green=$nordfox_red
+            light_green=$nordfox_green
+            orange=$nordfox_orange
+            red=$nordfox_red
+            pink=$nordfox_pink
+            yellow=$nordfox_yellow
+            blue=$nordfox_blue
+            ;;
     esac
 }
