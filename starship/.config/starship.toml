@@ -3,24 +3,14 @@
 format = """
 [](color_green)\
 $os\
-[█](bg:color_base fg:color_green)\
+[](bg:color_surface fg:color_green)\
 $directory\
 [](fg:color_surface)\
-$git_status\
-[](fg:color_cyan)\
-$c\
-$rust\
-$golang\
-$nodejs\
-$php\
-$java\
-$kotlin\
-$haskell\
-$python\
-[ ](fg:color_green)\
+($git_status [](fg:color_cyan))\
+($c$rust$golang$nodejs$php$java$kotlin$haskell$python[ ](fg:color_green))\
 $character"""
 
-palette = 'rosepine'
+palette = 'nordic'
 
 [palettes.mocha]
 color_base = '#1e1e2e'
@@ -67,11 +57,26 @@ color_cyan = '#9ccfd8'
 color_blue = '#c4a7e7'
 color_docker = '#1d90ed'
 color_hl_low = '#21202e'
+[palettes.nordic]
+color_base = '#232831'
+color_surface = '#2e3440'
+color_overlay = '#39404f'
+color_muted = '#z444c5e'
+color_subtle = '#5a657d'
+color_text = '#c7cdd9'
+color_pink = '#bf88bc'
+color_yellow = '#ebcb8b'
+color_orange = '#c9826b'
+color_green = '#a3be8c'
+color_cyan = '#88c0d0'
+color_blue = '#81a1c1'
+color_docker = '#1d90ed'
+color_hl_low = '#232831'
 
 
 [os]
 disabled = false
-style = "bg:color_green fg:color_text"
+style = "bg:color_green fg:color_base"
 format = '[$symbol]($style)'
 
 [os.symbols]
@@ -80,7 +85,7 @@ Ubuntu = "󰕈"
 SUSE = ""
 Raspbian = "󰐿"
 Mint = "󰣭"
-Macos = "󰀵"
+Macos = " 󰀵 "
 Manjaro = ""
 Linux = "󰌽"
 Gentoo = "󰣨"
