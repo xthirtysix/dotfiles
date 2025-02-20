@@ -3,7 +3,13 @@ return {
     keys = {
         {
             '<leader>e',
-            '<Cmd>lua MiniFiles.open()<CR>',
+            function()
+                local MiniFiles = require 'mini.files'
+                local _ = MiniFiles.close() or MiniFiles.open(vim.api.nvim_buf_get_name(0), false)
+                vim.schedule(function()
+                    MiniFiles.reveal_cwd()
+                end)
+            end,
             noremap = true,
             desc = 'Explorer',
         },
