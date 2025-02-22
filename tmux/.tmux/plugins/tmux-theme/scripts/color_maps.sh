@@ -15,5 +15,20 @@ set_theme() {
             yellow=$rosepine_gold
             blue=$rosepine_blue
             ;;
+        wave)
+            white=$wave_text
+            gray=$wave_surface
+            dark_gray=$wave_base
+            light_purple=$wave_pink
+            dark_purple=$wave_base
+            cyan=$wave_cyan
+            green=$wave_pink
+            light_green=$wave_green
+            orange=$wave_yellow
+            red=$wave_red
+            pink=$wave_pink
+            yellow=$wave_yellow
+            blue=$wave_blue
+            ;;
     esac
 }
