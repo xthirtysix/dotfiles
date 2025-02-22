@@ -1,9 +1,9 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
 format = """
-[](color_green)\
+[](color_pink)\
 $os\
-[█](bg:color_base fg:color_green)\
+[█](bg:color_base fg:color_pink)\
 $directory\
 [](fg:color_surface)\
 $git_status\
@@ -20,7 +20,7 @@ $python\
 [ ](fg:color_green)\
 $character"""
 
-palette = 'rosepine'
+palette = 'wave'
 
 [palettes.mocha]
 color_base = '#1e1e2e'
@@ -37,19 +37,19 @@ color_cyan = '#89dceb'
 color_blue = '#b2beff'
 color_docker = '#1d90ed'
 color_hl_low = '#313244'
-[palettes.dragon]
-color_base = '#12120f'
-color_surface = '#181616'
-color_overlay = '#282727'
-color_muted = '#383835'
-color_subtle = '#625e5a'
-color_text = '#c5c9c5'
-color_pink = '#a292a3'
-color_yellow = '#ccc28f'
-color_orange = '#b6927b'
-color_green = '#717c71'
-color_cyan = '#8ea4a2'
-color_blue = '#8992a7'
+[palettes.wave]
+color_base = '#1f1f28'
+color_surface = '#1f1d2e'
+color_overlay = '#26233a'
+color_muted = '#6e6a86'
+color_subtle = '#908caa'
+color_text = '#dcd7ba'
+color_pink = '#958fb8'
+color_yellow = '#c0a36e'
+color_orange = '#c0a36e'
+color_green = '#76946a'
+color_cyan = '#7fb4ca'
+color_blue = '#7e9cd8'
 color_docker = '#1d90ed'
 color_hl_low = '#181616'
 [palettes.rosepine]
@@ -71,7 +71,7 @@ color_hl_low = '#21202e'
 
 [os]
 disabled = false
-style = "bg:color_green fg:color_text"
+style = "bg:color_pink fg:color_surface"
 format = '[$symbol]($style)'
 
 [os.symbols]
