@@ -3,6 +3,7 @@ return {
     dependencies = {
         'nvim-tree/nvim-web-devicons',
         'Zeioth/heirline-components.nvim',
+        'EdenEast/nightfox.nvim',
     },
     event = 'VeryLazy',
     opts = {},
@@ -15,6 +16,15 @@ return {
         heirline.load_colors(heirline_components.hl.get_colors())
         heirline.setup(opts)
 
+        local Color = require 'nightfox.lib.color'
+        local base = Color.from_hex('#303030')
+
+        local function fade(color, amount)
+            amount = amount or 0.05
+            return base:blend(Color.from_hex(color), amount):to_css()
+        end
+
+
         local Align = { provider = '%=' }
         local Space = { provider = ' ' }
 
@@ -22,8 +32,10 @@ return {
         -- Colors
         -- --------------------------------------------------
         local colors = {
+            -- bg/fg
             bright_bg = utils.get_highlight('Folded').bg,
             bright_fg = utils.get_highlight('Folded').fg,
+            -- colors
             red = utils.get_highlight('DiagnosticError').fg,
             dark_red = utils.get_highlight('DiffDelete').bg,
             green = utils.get_highlight('String').fg,
@@ -32,13 +44,31 @@ return {
             orange = utils.get_highlight('Constant').fg,
             purple = utils.get_highlight('Statement').fg,
             cyan = utils.get_highlight('Special').fg,
-            diag_warn = utils.get_highlight('DiagnosticWarn').fg,
-            diag_error = utils.get_highlight('DiagnosticError').fg,
-            diag_hint = utils.get_highlight('DiagnosticHint').fg,
-            diag_info = utils.get_highlight('DiagnosticInfo').fg,
-            git_del = utils.get_highlight('diffDeleted').fg,
-            git_add = utils.get_highlight('diffAdded').fg,
-            git_change = utils.get_highlight('diffChanged').fg,
+            -- diagnostics
+            diag_warn = utils.get_highlight('DiagnosticWarn').fg or 'yellow',
+            diag_error = utils.get_highlight('DiagnosticError').fg or 'red',
+            diag_hint = utils.get_highlight('DiagnosticHint').fg or 'cyan',
+            diag_info = utils.get_highlight('DiagnosticInfo').fg or 'green',
+            -- git
+            git_del = utils.get_highlight('diffDeleted').fg or 'red',
+            git_add = utils.get_highlight('diffAdded').fg or 'green',
+            git_change = utils.get_highlight('diffChanged').fg or 'yellow',
+        }
+
+        local mode_colors = {
+            n = colors.blue,
+            i = colors.green,
+            v = colors.purple,
+            V = colors.purple,
+            ['\22'] = colors.purple,
+            c = colors.orange,
+            s = colors.cyan,
+            S = colors.cyan,
+            ['\19'] = colors.cyan,
+            R = colors.orange,
+            r = colors.orange,
+            ['!'] = colors.red,
+            t = colors.gray,
         }
 
         -- --------------------------------------------------
@@ -86,21 +116,6 @@ return {
                     ['!'] = '!',
                     t = 'Terminal',
                 },
-                mode_colors = {
-                    n = colors.blue,
-                    i = colors.green,
-                    v = colors.purple,
-                    V = colors.purple,
-                    ['\22'] = colors.purple,
-                    c = colors.orange,
-                    s = colors.cyan,
-                    S = colors.cyan,
-                    ['\19'] = colors.cyan,
-                    R = colors.orange,
-                    r = colors.orange,
-                    ['!'] = colors.red,
-                    t = colors.gray,
-                },
             },
             update = {
                 'ModeChanged',
@@ -118,7 +133,7 @@ return {
                             return ''
                         end,
                         hl = function(self)
-                            return { fg = self.mode_colors[self.mode:sub(1, 1)] }
+                            return { fg = mode_colors[self.mode:sub(1, 1)] }
                         end,
                     },
                     {
@@ -126,7 +141,7 @@ return {
                             return '%2(' .. self.mode_names[self.mode] .. '%) '
                         end,
                         hl = function(self)
-                            return { fg = 'black', bg = self.mode_colors[self.mode:sub(1, 1)], bold = true }
+                            return { fg = 'black', bg = mode_colors[self.mode:sub(1, 1)], bold = true }
                         end,
                     },
                     {
@@ -134,7 +149,7 @@ return {
                             return ''
                         end,
                         hl = function(self)
-                            return { fg = self.mode_colors[self.mode:sub(1, 1)], bg = 'lightblue' }
+                            return { fg = mode_colors[self.mode:sub(1, 1)], bg = fade(mode_colors[self.mode:sub(1, 1)]) }
                         end,
                     },
                 },
@@ -162,9 +177,15 @@ return {
                 end,
                 name = 'heirline_git',
             },
-            update = { 'DirChanged', 'BufWritePost', 'BufEnter' },
+            update = {
+                'DirChanged',
+                'BufWritePost',
+                'BufEnter',
+                'ModeChanged',
+            },
 
             init = function(self)
+                self.mode = vim.fn.mode(1)
                 local head_message = vim.fn.system 'git rev-parse --abbrev-ref HEAD'
                 if string.find(head_message, 'fatal') then
                     self.current_dir_head = vim.fn.system 'git branch --show-current' .. ' (no origin)'
@@ -173,23 +194,33 @@ return {
                 end
             end,
 
-            utils.surround({ '█', '' }, 'lightblue', {
-                hl = { fg = 'black' },
+            utils.surround({ '', '' }, 'none', {
                 flexible = 2,
                 {
-                    provider = function(self)
-                        return '' .. ' ' .. self.current_dir_head:gsub('%\n', '')
-                    end,
-                },
-                {
-                    provider = function(self)
-                        return '' .. ' ' .. self.current_dir_head:gsub('%\n', ''):sub(1, 10)
-                    end,
-                },
-                {
-                    provider = function()
-                        return ''
-                    end,
+                    {
+                        provider = function()
+                            return '█'
+                        end,
+                        hl = function(self)
+                            return { fg = fade(mode_colors[self.mode:sub(1, 1)]) }
+                        end,
+                    },
+                    {
+                        provider = function(self)
+                            return '' .. ' ' .. self.current_dir_head:gsub('%\n', '')
+                        end,
+                        hl = function(self)
+                            return { fg = mode_colors[self.mode:sub(1, 1)], bg = fade(mode_colors[self.mode:sub(1, 1)]) }
+                        end,
+                    },
+                    {
+                        provider = function()
+                            return '█'
+                        end,
+                        hl = function(self)
+                            return { fg = fade(mode_colors[self.mode:sub(1, 1)]) }
+                        end,
+                    },
                 },
             }),
         }
@@ -202,49 +233,64 @@ return {
             condition = conditions.is_git_repo,
 
             init = function(self)
+                self.mode = vim.fn.mode(1)
                 self.status_dict = vim.b.gitsigns_status_dict
                 self.has_changes = (self.status_dict.added and self.status_dict.added ~= 0)
                     or (self.status_dict.removed and self.status_dict.removed ~= 0)
                     or (self.status_dict.changed and self.status_dict.changed ~= 0)
             end,
 
+            update = {
+                'BufEnter',
+                'ModeChanged',
+            },
+
             utils.surround({ '', '' }, 'none', {
-                hl = { bg = 'none', fg = 'orange' },
                 flexible = 1,
                 {
                     {
                         condition = function(self)
                             return self.has_changes
                         end,
-                        provider = ' ',
+                        provider = ' ',
+                        hl = function(self)
+                            return { fg = mode_colors[self.mode:sub(1, 1)], bg = fade(mode_colors[self.mode:sub(1, 1)]) }
+                        end,
                     },
                     {
                         provider = function(self)
                             local count = self.status_dict.added or 0
                             return count > 0 and (' ' .. count .. ' ')
                         end,
-                        hl = { fg = 'git_add' },
+                        hl = function(self)
+                            return { fg = 'git_add', bg = fade(mode_colors[self.mode:sub(1, 1)]) }
+                        end,
                     },
                     {
                         provider = function(self)
                             local count = self.status_dict.removed or 0
                             return count > 0 and (' ' .. count .. ' ')
                         end,
-                        hl = { fg = 'git_del' },
+                        hl = function(self)
+                            return { fg = 'git_del', bg = fade(mode_colors[self.mode:sub(1, 1)]) }
+                        end,
                     },
                     {
                         provider = function(self)
                             local count = self.status_dict.changed or 0
                             return count > 0 and (' ' .. count .. ' ')
                         end,
-                        hl = { fg = 'git_change' },
+                        hl = function(self)
+                            return { fg = 'git_change', bg = fade(mode_colors[self.mode:sub(1, 1)]) }
+                        end,
                     },
                     {
-                        condition = function(self)
-                            return self.has_changes
+                        provider = function()
+                            return ''
                         end,
-                        provider = '',
-                        hl = { fg = colors.bright_fg },
+                        hl = function(self)
+                            return { fg = fade(mode_colors[self.mode:sub(1, 1)]) }
+                        end,
                     },
                 },
             }),
