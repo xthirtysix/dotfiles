@@ -172,7 +172,7 @@ main() {
             script="#($current_dir/git.sh)"
 
         elif [ $plugin = "battery" ]; then
-            IFS=' ' read -r -a colors <<<$(get_tmux_option "@theme-battery-colors" "cyan dark_gray")
+            IFS=' ' read -r -a colors <<<$(get_tmux_option "@theme-battery-colors" "light_green dark_gray")
             script="#($current_dir/battery.sh)"
 
         elif [ $plugin = "network" ]; then
