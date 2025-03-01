@@ -1,9 +1,9 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
 format = """
-[█](color_pink)\
+[█](color_green)\
 $os\
-[█](bg:color_base fg:color_pink)\
+[█](bg:color_base fg:color_green)\
 $directory\
 [](fg:color_surface)\
 $git_status\
@@ -71,7 +71,7 @@ color_hl_low = '#21202e'
 
 [os]
 disabled = false
-style = "bg:color_pink fg:color_surface"
+style = "bg:color_green fg:color_surface"
 format = '[$symbol]($style)'
 
 [os.symbols]
