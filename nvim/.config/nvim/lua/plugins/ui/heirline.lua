@@ -2,7 +2,6 @@ return {
     'rebelot/heirline.nvim',
     dependencies = {
         'nvim-tree/nvim-web-devicons',
-        'Zeioth/heirline-components.nvim',
         'EdenEast/nightfox.nvim',
     },
     event = 'VeryLazy',
@@ -12,25 +11,19 @@ return {
         local heirline = require 'heirline'
         local conditions = require 'heirline.conditions'
         local utils = require 'heirline.utils'
-        local heirline_components = require 'heirline-components.all'
-        heirline.load_colors(heirline_components.hl.get_colors())
         heirline.setup(opts)
 
+        -- --------------------------------------------------
+        -- Colors
+        -- --------------------------------------------------
         local Color = require 'nightfox.lib.color'
-        local base = Color.from_hex('#303030')
+        local base = Color.from_hex '#303030'
 
         local function fade(color, amount)
             amount = amount or 0.05
             return base:blend(Color.from_hex(color), amount):to_css()
         end
 
-
-        local Align = { provider = '%=' }
-        local Space = { provider = ' ' }
-
-        -- --------------------------------------------------
-        -- Colors
-        -- --------------------------------------------------
         local colors = {
             -- bg/fg
             bright_bg = utils.get_highlight('Folded').bg,
@@ -68,17 +61,13 @@ return {
             R = colors.orange,
             r = colors.orange,
             ['!'] = colors.red,
-            t = colors.gray,
+            t = colors.cyan,
         }
 
         -- --------------------------------------------------
         -- Mode
         -- --------------------------------------------------
-
         local ViMode = {
-            init = function(self)
-                self.mode = vim.fn.mode(1)
-            end,
             static = {
                 mode_names = { -- change the strings if you like it vvvvverbose!
                     n = '',
@@ -114,9 +103,10 @@ return {
                     rm = 'M',
                     ['r?'] = '?',
                     ['!'] = '!',
-                    t = 'Terminal',
+                    t = '',
                 },
             },
+
             update = {
                 'ModeChanged',
                 pattern = '*:*',
@@ -124,42 +114,98 @@ return {
                     vim.cmd 'redrawstatus'
                 end),
             },
-            -- Return
-            utils.surround({ '', '' }, 'none', {
-                flexible = 1000,
+
+            flexible = 1000,
+
+            {
                 {
-                    {
-                        provider = function()
-                            return ''
-                        end,
-                        hl = function(self)
-                            return { fg = mode_colors[self.mode:sub(1, 1)] }
-                        end,
-                    },
-                    {
-                        provider = function(self)
-                            return '%2(' .. self.mode_names[self.mode] .. '%) '
-                        end,
-                        hl = function(self)
-                            return { fg = 'black', bg = mode_colors[self.mode:sub(1, 1)], bold = true }
-                        end,
-                    },
-                    {
-                        provider = function()
-                            return ''
-                        end,
-                        hl = function(self)
-                            return { fg = mode_colors[self.mode:sub(1, 1)], bg = fade(mode_colors[self.mode:sub(1, 1)]) }
-                        end,
-                    },
+                    provider = '',
+                    hl = function(self)
+                        return { fg = self.color_bright }
+                    end,
                 },
-            }),
+                {
+                    provider = function(self)
+                        return '%2(' .. self.mode_names[self.mode] .. '%) '
+                    end,
+                    hl = function(self)
+                        return { fg = self.color_dark, bg = self.color_bright }
+                    end,
+                },
+                {
+                    provider = function()
+                        return '█'
+                    end,
+                    hl = function(self)
+                        return { fg = self.color_bright, bg = self.color_dark }
+                    end,
+                },
+                {
+                    provider = ' ',
+                    hl = function(self)
+                        return { fg = self.color_dark, bg = self.color_bright }
+                    end,
+                },
+            },
         }
 
         -- --------------------------------------------------
-        -- Git
+        -- File Name
         -- --------------------------------------------------
+        local FileName = {
+            update = {
+                'DirChanged',
+                'BufWritePost',
+                'BufEnter',
+                'ModeChanged',
+            },
 
+            init = function(self)
+                local path = vim.loop.cwd() .. '/.git'
+                self.has_git = vim.loop.fs_stat(path)
+
+                local filepath = vim.api.nvim_buf_get_name(0)
+                self.filename = vim.fn.fnamemodify(filepath, ':t')
+                local extension = vim.fn.fnamemodify(self.filename, ':e')
+                self.icon, self.icon_color =
+                    require('nvim-web-devicons').get_icon_color(self.filename, extension, { default = true })
+            end,
+
+            flexible = 2,
+            {
+                {
+                    provider = function(self)
+                        return self.icon and (self.icon .. ' ' .. self.filename)
+                    end,
+                    hl = function(self)
+                        return { bg = self.color_bright, fg = self.color_dark }
+                    end,
+                },
+                {
+                    condition = function(self)
+                        return not self.has_git
+                    end,
+
+                    provider = '',
+                    hl = function(self)
+                        return { fg = self.color_bright }
+                    end,
+                },
+                {
+                    condition = function(self)
+                        return self.has_git
+                    end,
+                    provider = '',
+                    hl = function(self)
+                        return { fg = self.color_dark, bg = self.color_bright }
+                    end,
+                },
+            },
+        }
+
+        -- -- --------------------------------------------------
+        -- Git branch
+        -- --------------------------------------------------
         local Git = {
             condition = function()
                 local path = vim.loop.cwd() .. '/.git'
@@ -169,6 +215,7 @@ return {
                 end
                 return true
             end,
+
             on_click = {
                 callback = function()
                     vim.defer_fn(function()
@@ -177,6 +224,7 @@ return {
                 end,
                 name = 'heirline_git',
             },
+
             update = {
                 'DirChanged',
                 'BufWritePost',
@@ -185,7 +233,6 @@ return {
             },
 
             init = function(self)
-                self.mode = vim.fn.mode(1)
                 local head_message = vim.fn.system 'git rev-parse --abbrev-ref HEAD'
                 if string.find(head_message, 'fatal') then
                     self.current_dir_head = vim.fn.system 'git branch --show-current' .. ' (no origin)'
@@ -194,46 +241,40 @@ return {
                 end
             end,
 
-            utils.surround({ '', '' }, 'none', {
-                flexible = 2,
+            flexible = 2,
+            {
                 {
-                    {
-                        provider = function()
-                            return '█'
-                        end,
-                        hl = function(self)
-                            return { fg = fade(mode_colors[self.mode:sub(1, 1)]) }
-                        end,
-                    },
-                    {
-                        provider = function(self)
-                            return '' .. ' ' .. self.current_dir_head:gsub('%\n', '')
-                        end,
-                        hl = function(self)
-                            return { fg = mode_colors[self.mode:sub(1, 1)], bg = fade(mode_colors[self.mode:sub(1, 1)]) }
-                        end,
-                    },
-                    {
-                        provider = function()
-                            return '█'
-                        end,
-                        hl = function(self)
-                            return { fg = fade(mode_colors[self.mode:sub(1, 1)]) }
-                        end,
-                    },
+                    provider = function()
+                        return '█'
+                    end,
+                    hl = function(self)
+                        return { fg = self.color_bright }
+                    end,
                 },
-            }),
+                {
+                    provider = function(self)
+                        return '' .. ' ' .. self.current_dir_head:gsub('%\n', '')
+                    end,
+                    hl = function(self)
+                        return { fg = self.color_dark, bg = self.color_bright }
+                    end,
+                },
+                {
+                    provider = '█',
+                    hl = function(self)
+                        return { fg = self.color_bright, bg = self.color_dark }
+                    end,
+                },
+            },
         }
 
         -- -- --------------------------------------------------
         -- GitDiff
         -- --------------------------------------------------
-        -- local GitDiff = heirline_components.component.git_diff { surround = { color = 'none' } }
         local GitDiff = {
             condition = conditions.is_git_repo,
 
             init = function(self)
-                self.mode = vim.fn.mode(1)
                 self.status_dict = vim.b.gitsigns_status_dict
                 self.has_changes = (self.status_dict.added and self.status_dict.added ~= 0)
                     or (self.status_dict.removed and self.status_dict.removed ~= 0)
@@ -245,55 +286,51 @@ return {
                 'ModeChanged',
             },
 
-            utils.surround({ '', '' }, 'none', {
-                flexible = 1,
+            flexible = 1,
+            {
                 {
-                    {
-                        condition = function(self)
-                            return self.has_changes
-                        end,
-                        provider = ' ',
-                        hl = function(self)
-                            return { fg = mode_colors[self.mode:sub(1, 1)], bg = fade(mode_colors[self.mode:sub(1, 1)]) }
-                        end,
-                    },
-                    {
-                        provider = function(self)
-                            local count = self.status_dict.added or 0
-                            return count > 0 and (' ' .. count .. ' ')
-                        end,
-                        hl = function(self)
-                            return { fg = 'git_add', bg = fade(mode_colors[self.mode:sub(1, 1)]) }
-                        end,
-                    },
-                    {
-                        provider = function(self)
-                            local count = self.status_dict.removed or 0
-                            return count > 0 and (' ' .. count .. ' ')
-                        end,
-                        hl = function(self)
-                            return { fg = 'git_del', bg = fade(mode_colors[self.mode:sub(1, 1)]) }
-                        end,
-                    },
-                    {
-                        provider = function(self)
-                            local count = self.status_dict.changed or 0
-                            return count > 0 and (' ' .. count .. ' ')
-                        end,
-                        hl = function(self)
-                            return { fg = 'git_change', bg = fade(mode_colors[self.mode:sub(1, 1)]) }
-                        end,
-                    },
-                    {
-                        provider = function()
-                            return ''
-                        end,
-                        hl = function(self)
-                            return { fg = fade(mode_colors[self.mode:sub(1, 1)]) }
-                        end,
-                    },
+                    condition = function(self)
+                        return self.has_changes
+                    end,
+                    provider = '█',
+                    hl = function(self)
+                        return { fg = self.color_dark }
+                    end,
                 },
-            }),
+                {
+                    provider = function(self)
+                        local count = self.status_dict.added or 0
+                        return count > 0 and (' ' .. count .. ' ')
+                    end,
+                    hl = function(self)
+                        return { fg = 'git_add', bg = self.color_dark }
+                    end,
+                },
+                {
+                    provider = function(self)
+                        local count = self.status_dict.removed or 0
+                        return count > 0 and (' ' .. count .. ' ')
+                    end,
+                    hl = function(self)
+                        return { fg = 'git_del', bg = self.color_dark }
+                    end,
+                },
+                {
+                    provider = function(self)
+                        local count = self.status_dict.changed or 0
+                        return count > 0 and (' ' .. count .. ' ')
+                    end,
+                    hl = function(self)
+                        return { fg = 'git_change', bg = self.color_dark }
+                    end,
+                },
+                {
+                    provider = '',
+                    hl = function(self)
+                        return { fg = self.color_dark }
+                    end,
+                },
+            },
         }
 
         -- --------------------------------------------------
@@ -323,52 +360,49 @@ return {
 
             update = { 'DiagnosticChanged', 'BufEnter' },
 
-            utils.surround({ ' ', '' }, 'none', {
-                hl = { bg = 'none', fg = 'orange' },
-                flexible = 1,
+            flexible = 1,
+            {
                 {
-                    {
-                        provider = function(self)
-                            -- 0 is just another output, we can decide to print it or not!
-                            return self.errors > 0 and (self.error_icon .. self.errors .. ' ')
-                        end,
-                        hl = { fg = 'diag_error' },
-                    },
-                    {
-                        provider = function(self)
-                            return self.warnings > 0 and (self.warn_icon .. self.warnings .. ' ')
-                        end,
-                        hl = { fg = 'diag_warn' },
-                    },
-                    {
-                        provider = function(self)
-                            return self.info > 0 and (self.info_icon .. self.info .. ' ')
-                        end,
-                        hl = { fg = 'diag_info' },
-                    },
-                    {
-                        provider = function(self)
-                            return self.hints > 0 and (self.hint_icon .. self.hints)
-                        end,
-                        hl = { fg = 'diag_hint' },
-                    },
-                    {
-                        condition = function(self)
-                            return self.has_issues
-                        end,
-                        provider = '',
-                        hl = { fg = colors.bright_fg },
-                    },
+                    provider = function(self)
+                        -- 0 is just another output, we can decide to print it or not!
+                        return self.errors > 0 and (self.error_icon .. self.errors .. ' ')
+                    end,
+                    hl = { fg = 'diag_error' },
                 },
-            }),
+                {
+                    provider = function(self)
+                        return self.warnings > 0 and (self.warn_icon .. self.warnings .. ' ')
+                    end,
+                    hl = { fg = 'diag_warn' },
+                },
+                {
+                    provider = function(self)
+                        return self.info > 0 and (self.info_icon .. self.info .. ' ')
+                    end,
+                    hl = { fg = 'diag_info' },
+                },
+                {
+                    provider = function(self)
+                        return self.hints > 0 and (self.hint_icon .. self.hints)
+                    end,
+                    hl = { fg = 'diag_hint' },
+                },
+                {
+                    condition = function(self)
+                        return self.has_issues
+                    end,
+                    provider = '',
+                    hl = { fg = colors.bright_fg },
+                },
+            },
         }
+
         -- --------------------------------------------------
         -- LSP
         -- --------------------------------------------------
-
         local LSPActive = {
             condition = conditions.lsp_attached,
-            update = { 'LspAttach', 'LspDetach' },
+
             on_click = {
                 callback = function()
                     vim.defer_fn(function()
@@ -377,9 +411,25 @@ return {
                 end,
                 name = 'heirline_LSP',
             },
-            utils.surround({ '', '' }, 'green', {
-                hl = { fg = 'black' },
-                flexible = 20,
+
+            update = {
+                'LspAttach',
+                'LspDetach',
+                'DirChanged',
+                'BufWritePost',
+                'BufEnter',
+                'ModeChanged',
+            },
+
+            flexible = 20,
+
+            {
+                {
+                    provider = '█',
+                    hl = function(self)
+                        return { fg = self.color_dark }
+                    end,
+                },
                 {
                     provider = function()
                         local names = {}
@@ -388,28 +438,22 @@ return {
                         end
                         return ' ' .. table.concat(names, ', ')
                     end,
-                },
-                {
-                    provider = function()
-                        local names = {}
-                        for _, server in pairs(vim.lsp.get_active_clients { bufnr = 0 }) do
-                            table.insert(names, server.name:sub(1, 2))
-                        end
-                        return ' ' .. table.concat(names, ', ')
+                    hl = function(self)
+                        return { bg = self.color_dark }
                     end,
                 },
                 {
-                    provider = function()
-                        return ' '
+                    provider = '█',
+                    hl = function(self)
+                        return { fg = self.color_dark }
                     end,
                 },
-            }),
+            },
         }
 
         -- --------------------------------------------------
         -- Linter
         -- --------------------------------------------------
-
         local LinterActive = {
             condition = function(self)
                 if require('lazy.core.config').plugins['nvim-lint']._.loaded then
@@ -423,99 +467,160 @@ return {
                     return false
                 end
             end,
-            utils.surround({ '', '' }, 'orange', {
-                hl = { fg = 'black' },
-                flexible = 30,
+
+            flexible = 30,
+
+            {
+                {
+                    condition = conditions.lsp_attached,
+                    provider = '',
+                    hl = function(self)
+                        return { bg = self.color_dark }
+                    end,
+                },
+                {
+                    condition = function()
+                        return not conditions.lsp_attached
+                    end,
+                    provider = '█',
+                    hl = function(self)
+                        return { fg = self.color_dark }
+                    end,
+                },
+                {
+                    provider = '█',
+                    hl = function(self)
+                        return { fg = self.color_dark }
+                    end,
+                },
                 {
                     provider = function(self)
                         return '󱉶 ' .. table.concat(self.linters, ', ')
                     end,
-                },
-                {
-                    provider = function(self)
-                        local shortened = {}
-                        for i, linter in ipairs(self.linters) do
-                            shortened[i] = linter:sub(1, 2)
-                        end
-                        return '󱉶 ' .. table.concat(shortened, ', ')
+                    hl = function(self)
+                        return { bg = self.color_dark }
                     end,
                 },
                 {
-                    provider = function()
-                        return '󱉶'
+                    provider = '█',
+                    hl = function(self)
+                        return { fg = self.color_dark }
                     end,
                 },
-            }),
-        }
-
-        -- --------------------------------------------------
-        -- Lazy
-        -- --------------------------------------------------
-
-        local Lazy = {
-            condition = require('lazy.status').has_updates,
-            update = { 'User', pattern = 'LazyUpdate' },
-            on_click = {
-                callback = function()
-                    vim.defer_fn(function()
-                        vim.cmd 'Lazy'
-                    end, 100)
-                end,
-                name = 'update_plugins',
             },
-            utils.surround({ '', '' }, 'lightblue', {
-                hl = { fg = 'black' },
-                flexible = 1,
-                {
-                    provider = function()
-                        return require('lazy.status').updates()
-                    end,
-                },
-                {
-                    provider = '',
-                },
-            }),
-        }
-
-        -- --------------------------------------------------
-        -- Filetype
-        -- --------------------------------------------------
-        local FileType = heirline_components.component.file_info {
-            filetype = false,
-            filename = {},
-            file_modified = false,
-            surround = { color = 'none' },
         }
 
         -- --------------------------------------------------
         -- Nav
         -- --------------------------------------------------
-        local Nav = heirline_components.component.nav { surround = { color = 'none', hl = { fg = colors.cyan } } }
+        local Ruler = {
+            update = {
+                'DirChanged',
+                'BufWritePost',
+                'BufEnter',
+                'ModeChanged',
+                'CursorMoved',
+                'WinScrolled',
+            },
+
+            static = {
+                sbar = { '🭶', '🭷', '🭸', '🭹', '🭺', '🭻' },
+            },
+
+            flexible = 1,
+
+            {
+                {
+                    provider = '',
+                    hl = function(self)
+                        return { fg = self.color_bright, bg = self.color_dark }
+                    end,
+                },
+                {
+                    -- %l = current line number
+                    -- %L = number of lines in the buffer
+                    -- %c = column number
+                    -- %P = percentage through file of displayed window
+                    provider = '%7(%l/%3L%):%2c',
+                    hl = function(self)
+                        return { fg = self.color_dark, bg = self.color_bright }
+                    end,
+                },
+                {
+                    provider = '█',
+                    hl = function(self)
+                        return { fg = self.color_bright, bg = self.color_dark }
+                    end,
+                },
+                {
+                    provider = function(self)
+                        local curr_line = vim.api.nvim_win_get_cursor(0)[1]
+                        local lines = vim.api.nvim_buf_line_count(0)
+                        local i = math.floor((curr_line - 1) / lines * #self.sbar) + 1
+                        return string.rep(self.sbar[i], 2)
+                    end,
+                    hl = function(self)
+                        return { fg = self.color_dark, bg = self.color_bright }
+                    end,
+                },
+                {
+                    provider = '',
+                    hl = function(self)
+                        return { fg = self.color_bright }
+                    end,
+                },
+            },
+        }
+
+        -- --------------------------------------------------
+        -- Spacings
+        -- --------------------------------------------------
+        local Align = { provider = '%=' }
+        local Space = { provider = ' ' }
+
+        -- --------------------------------------------------
+        -- Init functions
+        -- --------------------------------------------------
+        local function initMode(self)
+            self.mode = vim.fn.mode(1)
+        end
+
+        local function initHasGit(self)
+            local path = vim.loop.cwd() .. '/.git'
+            self.has_git = vim.loop.fs_stat(path)
+        end
+
+        local function initColors(self)
+            self.color_dark = fade(mode_colors[vim.fn.mode(1):sub(1, 1)])
+            self.color_bright = mode_colors[vim.fn.mode(1):sub(1, 1)]
+        end
 
         -- --------------------------------------------------
         -- Plugin init
         -- --------------------------------------------------
-        -- local GitSeparator = SeparatorRight('lightblue', utils.get_highlight('Directory').fg)
-
         require('heirline').setup {
             statusline = {
+                init = function(self)
+                    initMode(self)
+                    initColors(self)
+                    initHasGit(self)
+                end,
                 hl = { bg = 'none' },
                 Space,
                 ViMode,
+                FileName,
                 Git,
                 GitDiff,
                 Diagnostics,
-                FileType,
                 Align,
-                Lazy,
                 Align,
                 Align,
                 Align,
                 Space,
                 LSPActive,
                 LinterActive,
-                Nav,
-                heirline_components.component.M,
+                Ruler,
+                Space,
             },
             opts = {
                 colors = colors,
