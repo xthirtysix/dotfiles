@@ -80,9 +80,6 @@ return {
                     window = { border = 'single' },
                 },
                 menu = {
-                    auto_show = function(ctx)
-                        return ctx.mode ~= 'default'
-                    end,
                     border = 'single',
                     draw = {
                         columns = { { 'label', gap = 2 }, { 'kind_icon', 'kind', gap = 1 } },
@@ -102,32 +99,21 @@ return {
             },
         },
         opts_extend = { 'sources.default' },
-        config = function()
-            local neocodeium = require 'neocodeium'
-            local blink = require 'blink.cmp'
-
-            vim.api.nvim_create_autocmd('User', {
-                pattern = 'BlinkCmpMenuOpen',
-                callback = function()
-                    neocodeium.clear()
-                end,
-            })
-
-            neocodeium.setup {
-                filter = function()
-                    return not blink.is_visible()
-                end,
-            }
-        end,
     },
-    -- add this to the file where you setup your other plugins:
     {
         'monkoose/neocodeium',
-        event = 'VeryLazy',
         config = function()
             local neocodeium = require 'neocodeium'
-            neocodeium.setup {}
-            vim.keymap.set('i', '<A-f>', neocodeium.accept)
+            neocodeium.setup {
+                show_label = false,
+            }
+            vim.keymap.set('i', '<A-l>', neocodeium.accept)
+            vim.keymap.set('i', '<A-j>', function()
+                require('neocodeium').cycle_or_complete()
+            end)
+            vim.keymap.set('i', '<A-k>', function()
+                require('neocodeium').cycle_or_complete(-1)
+            end)
         end,
     },
 }
