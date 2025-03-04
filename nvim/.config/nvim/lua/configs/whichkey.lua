@@ -21,10 +21,36 @@ require('which-key').add {
     {
         '<leader>/',
         function()
-            Snacks.picker.grep { title = '󰺯 Find in files ' }
+            Snacks.picker.grep { title = '󰺯 Grep' }
         end,
         desc = 'Find in files',
         icon = { icon = '󰺯', hl = 'WhichKeyNormal' },
+    },
+    {
+        {
+            '<leader>,',
+            function()
+                Snacks.picker.buffers { title = 'Buffers' }
+            end,
+            desc = 'Buffers',
+            icon = { icon = '', hl = 'WhichKeyNormal' },
+        },
+    },
+    {
+        '<leader>:',
+        function()
+            Snacks.picker.command_history()
+        end,
+        desc = 'Command History',
+        icon = { icon = '', hl = 'WhichKeyNormal' },
+    },
+    {
+        '<leader>n',
+        function()
+            Snacks.picker.notifications()
+        end,
+        desc = 'Notification History',
+        icon = { icon = '󰎟', hl = 'WhichKeyNormal' },
     },
     -- LSP
     {
