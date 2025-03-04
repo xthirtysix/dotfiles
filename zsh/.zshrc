@@ -2,7 +2,7 @@
 # Amazon Q pre block. Keep at the top of this file #
 ####################################################
 # [[ -f "${HOME}/Library/Application Support/amazon-q/shell/zshrc.pre.zsh" ]] && builtin source "${HOME}/Library/Application Support/amazon-q/shell/zshrc.pre.zsh"
-export TERM=xterm-256color-italic
+export TERM=xterm-256color
 export LANG="en_US.UTF-8"
 export PATH="$PATH:$HOME/bin"
 export PATH="$HOME/.local/bin:$PATH"
@@ -54,6 +54,7 @@ eval $(thefuck --alias)
 eval $(starship init zsh)
 eval ___MY_VMOPTIONS_SHELL_FILE="${HOME}/.jetbrains.vmoptions.sh"; if [ -f "${___MY_VMOPTIONS_SHELL_FILE}" ]; then . "${___MY_VMOPTIONS_SHELL_FILE}"; fi
 eval $(thefuck --alias)
+eval "$(zoxide init zsh)"
 
 ##############################
 # tabtab source for packages #
