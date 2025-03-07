@@ -18,6 +18,26 @@ return {
                 end,
             },
         },
+        --     { 'saghen/blink.compat', opts = { enable_events = true } },
+        --     {
+        --         'Exafunction/codeium.nvim',
+        --         config = function()
+        --             require('codeium').setup {
+        --                 virtual_text = {
+        --                     enabled = true,
+        --                     key_bindings = {
+        --                         accept = '<Tab>',
+        --                         next = '<M-]>',
+        --                         prev = '<M-[>',
+        --                         accept_word = false,
+        --                         accept_line = false,
+        --                         clear = false,
+        --                     },
+        --                 },
+        --             }
+        --         end,
+        --     },
+        -- },
         version = '*',
         opts = {
             keymap = {
@@ -107,11 +127,11 @@ return {
             neocodeium.setup {
                 show_label = false,
             }
-            vim.keymap.set('i', '<A-l>', neocodeium.accept)
-            vim.keymap.set('i', '<A-j>', function()
+            vim.keymap.set('i', '<Tab>', neocodeium.accept)
+            vim.keymap.set('i', '<M-]>', function()
                 require('neocodeium').cycle_or_complete()
             end)
-            vim.keymap.set('i', '<A-k>', function()
+            vim.keymap.set('i', '<M-[>', function()
                 require('neocodeium').cycle_or_complete(-1)
             end)
         end,
