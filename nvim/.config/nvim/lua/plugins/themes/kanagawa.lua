@@ -2,7 +2,6 @@ return {
     'rebelot/kanagawa.nvim',
     lazy = false,
     priority = 1000,
-    enabled = true,
     config = function()
         local theme = require 'kanagawa'
         theme.setup {
@@ -11,7 +10,7 @@ return {
             commentStyle = { italic = true },
             keywordStyle = { italic = true },
             statementStyle = { bold = true },
-            transparent = true,
+            transparent = false,
             dimInactive = false,
             terminalColors = false,
             colors = {
@@ -47,3 +46,4 @@ return {
         vim.cmd 'highlight FloatBorder guibg=NONE'
     end,
 }
+

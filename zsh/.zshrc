@@ -65,3 +65,12 @@ eval "$(zoxide init zsh)"
 # Amazon Q post block. Keep at the bottom of this file #
 ########################################################
 # [[ -f "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh" ]] && builtin source "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh"
+
+# pnpm
+export PNPM_HOME="/Users/x36/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+alias nx="npx nx"

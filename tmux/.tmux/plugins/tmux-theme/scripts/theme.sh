@@ -11,7 +11,7 @@ main() {
     tmux bind-key -r T run-shell "#{@theme-root}/menu_items/main.sh"
 
     # set theme
-    theme=$(get_tmux_option "@theme-palette" "wave")
+    theme=$(get_tmux_option "@theme-palette" "catpuccin")
     ignore_window_colors=$(get_tmux_option "@theme-ignore-window-colors" false)
 
     set_theme $theme

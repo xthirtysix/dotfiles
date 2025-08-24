@@ -30,5 +30,19 @@ set_theme() {
             yellow=$wave_yellow
             blue=$wave_blue
             ;;
+        catpuccin)
+            white=$catppuccin_text
+            gray=$catppuccin_surface0
+            dark_gray=$catppuccin_base
+            light_purple=$catppuccin_rosewater
+            dark_purple=$catppuccin_base
+            cyan=$catppuccin_blue
+            green=$catppuccin_pink
+            light_green=$catppuccin_teal
+            orange=$catppuccin_yellow
+            red=$catppuccin_pink
+            pink=$catppuccin_rosewater
+            yellow=$catppuccin_yellow
+            blue=$catppuccin_lavender
     esac
 }

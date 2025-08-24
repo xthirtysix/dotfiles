@@ -1,8 +1,11 @@
 vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '
 
--- lazy always goes first
-require 'configs.lazy'
--- then rest configs
-require 'configs.filetypes'
-require 'configs.whichkey'
-require 'configs.options'
+require 'config.lazy'
+
+require 'config.globals'
+require 'config.options'
+require 'config.keymap'
+require 'config.autocmd'
+require 'config.lsp'
+

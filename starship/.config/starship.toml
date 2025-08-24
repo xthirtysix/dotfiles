@@ -1,11 +1,9 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
 format = """
-[█](color_green)\
-$os\
-[█](bg:color_base fg:color_green)\
+[](color_green)\
 $directory\
-[](fg:color_surface)\
+[█](bg:color_base fg:color_green)\
 $git_status\
 [](fg:color_cyan)\
 $c\
@@ -20,7 +18,7 @@ $python\
 [ ](fg:color_green)\
 $character"""
 
-palette = 'wave'
+palette = 'mocha'
 
 [palettes.mocha]
 color_base = '#1e1e2e'
@@ -102,7 +100,8 @@ style_root = "bg:color_yellow fg:color_text"
 format = '[ $user ]($style)'
 
 [directory]
-style = "fg:color_text bg:color_surface"
+# style = "fg:color_text bg:color_surface"
+style = "bg:color_green fg:color_surface"
 format = "[ $path]($style)"
 truncation_length = 3
 truncation_symbol = "…/"
@@ -114,7 +113,14 @@ truncation_symbol = "…/"
 "Pictures" = " "
 "Projects" = "󰲋 "
 "ArrivedAliens" = "󱃅 "
+"premier.one-v3" = " "
+"koala-dungeon" = "󱜿 "
 ".dotfiles" = " "
+"nvim/.config/nvim" = " "
+"starship/.config" = "󱓞 "
+"ghostty/.config/ghostty" = " "
+"tmux" = " "
+"zsh" = "󱆃 "
 
 [git_branch]
 symbol = ""
@@ -143,7 +149,7 @@ format = '[[ $symbol( $version) ](fg:color_text bg:color_green)]($style)'
 [golang]
 symbol = ""
 style = "fg:color_text"
-format = '[ $symbol](fg:#00ADD8)[]( $version)]($style)'
+format = '[[ $symbol](fg:#00ADD8)]( $version)($style)'
 
 [php]
 symbol = ""
