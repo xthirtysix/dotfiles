@@ -74,3 +74,10 @@ case ":$PATH:" in
 esac
 # pnpm end
 alias nx="npx nx"
+
+# bun completions
+[ -s "/Users/x36/.bun/_bun" ] && source "/Users/x36/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"

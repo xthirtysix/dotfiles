@@ -9,6 +9,7 @@ adjust-cell-height = 20%
 macos-titlebar-style = hidden
 quick-terminal-position = top
 quick-terminal-screen = mouse
+quick-terminal-size = 100%,100%
 window-width = 100
 window-height = 35
 window-padding-x = 0
@@ -22,29 +23,51 @@ copy-on-select = clipboard
 
 # UI
 # Catppuccin Mocha Terminal Colors
-palette = 0=#1e1e2e
-palette = 1=#f38ba8
-palette = 2=#a6e3a1
-palette = 3=#f9e2af
-palette = 4=#89b4fa
-palette = 5=#f5c2e7
-palette = 6=#94e2d5
-palette = 7=#cdd6f4
-palette = 8=#45475a
-palette = 9=#f38ba8
-palette = 10=#a6e3a1
-palette = 11=#f9e2af
-palette = 12=#89b4fa
-palette = 13=#f5c2e7
-palette = 14=#94e2d5
-palette = 15=#cdd6f4
-background = #1e1e2e
-foreground = #cdd6f4
-cursor-color = #f5e0dc
-selection-background = #45475a
-selection-foreground = #cdd6f4
+# palette = 0=#1e1e2e
+# palette = 1=#f38ba8
+# palette = 2=#a6e3a1
+# palette = 3=#f9e2af
+# palette = 4=#89b4fa
+# palette = 5=#f5c2e7
+# palette = 6=#94e2d5
+# palette = 7=#cdd6f4
+# palette = 8=#45475a
+# palette = 9=#f38ba8
+# palette = 10=#a6e3a1
+# palette = 11=#f9e2af
+# palette = 12=#89b4fa
+# palette = 13=#f5c2e7
+# palette = 14=#94e2d5
+# palette = 15=#cdd6f4
+# background = #1e1e2e
+# foreground = #cdd6f4
+# cursor-color = #f5e0dc
+# selection-background = #45475a
+# selection-foreground = #cdd6f4
+background = #2b2d3a
+foreground = #e1e3e4
+selection-background = #393e53
+selection-foreground = #e1e3e4
+cursor-color = #e1e3e4
+cursor-text = #2b2d3a
+palette = 0=#181a1c
+palette = 1=#fb617e
+palette = 2=#9ed06c
+palette = 3=#edc763
+palette = 4=#6dcae8
+palette = 5=#bb97ee
+palette = 6=#f89860
+palette = 7=#e1e3e4
+palette = 8=#7e8294
+palette = 9=#fb617e
+palette = 10=#9ed06c
+palette = 11=#edc763
+palette = 12=#6dcae8
+palette = 13=#bb97ee
+palette = 14=#f89860
+palette = 15=#e1e3e4
 
-background-opacity = 0.9
+background-opacity = 1
 background-blur-radius = 20
 cursor-style = block
 mouse-hide-while-typing

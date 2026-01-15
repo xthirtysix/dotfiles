@@ -45,3 +45,18 @@ catppuccin_surface0='#363a4f'  # поверхности
 catppuccin_surface1='#494d64'  # overlay элементы
 catppuccin_subtext0='#a5adcb'  # приглушенный текст
 catppuccin_subtext1='#b8c0e0'  # менее приглушенный текст
+
+# Sonokai Andromeda - основные акцентные цвета
+sonokai_red='#fb617e'          # красный/розовый
+sonokai_green='#9ed06c'        # зеленый
+sonokai_yellow='#edc763'       # желтый
+sonokai_blue='#6dcae8'         # голубой/cyan
+sonokai_purple='#bb97ee'       # фиолетовый
+sonokai_orange='#f89860'       # оранжевый
+
+# Sonokai Andromeda - слои интерфейса
+sonokai_text='#e1e3e4'         # основной текст
+sonokai_base='#2b2d3a'         # фон приложения
+sonokai_surface='#393e53'      # поверхности/выделение
+sonokai_dark='#181a1c'         # темный фон
+sonokai_muted='#7e8294'        # приглушенный текст

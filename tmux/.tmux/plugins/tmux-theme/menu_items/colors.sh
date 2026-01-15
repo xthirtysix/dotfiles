@@ -6,7 +6,7 @@ ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && cd .. && pwd)"
 source "$ROOT_DIR/scripts/utils.sh"
 
 render() {
-    local theme=$(get_tmux_option "@theme-palette" "catpuccin")
+    local theme=$(get_tmux_option "@theme-palette" "sonokai")
 
     local rosepine_title="Rose Pine"
 

@@ -44,5 +44,21 @@ set_theme() {
             pink=$catppuccin_rosewater
             yellow=$catppuccin_yellow
             blue=$catppuccin_lavender
+            ;;
+        sonokai)
+            white=$sonokai_text
+            gray=$sonokai_surface
+            dark_gray=$sonokai_base
+            light_purple=$sonokai_purple
+            dark_purple=$sonokai_dark
+            cyan=$sonokai_blue
+            green=$sonokai_green
+            light_green=$sonokai_green
+            orange=$sonokai_orange
+            red=$sonokai_red
+            pink=$sonokai_red
+            yellow=$sonokai_yellow
+            blue=$sonokai_blue
+            ;;
     esac
 }
