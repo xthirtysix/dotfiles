@@ -4,47 +4,32 @@ return {
     priority = 1000,
     lazy = false,
     opts = {
-        -- animations lib
-        -- animate = {},
-        -- lazygit integration
+        animate = { enabled = true },
+        scroll = { enabled = true },
+        bigfile = { enabled = false },
+        dashboard = { enabled = true },
+        explorer = { enabled = false },
+        indent = { enabled = false },
+        input = { enabled = false },
+        picker = {
+            enabled = true,
+            formatters = {
+                file = {
+                    truncate = 40,
+                }
+            }
+        },
+        notifier = { enabled = false },
+        quickfile = { enabled = false },
+        scope = { enabled = false },
+        words = { enabled = true },
         lazygit = {},
-        -- indeint higlihgt
-        -- indent = {
-        --     indent = {
-        --         only_scope = true,
-        --         only_current = true,
-        --     },
-        --     scope = {
-        --         enabled = true,
-        --         -- hl = 'Comment',
-        --         hl = 'IndentBlanklineChar',
-        --     },
-        --     chunk = {
-        --         enabled = false,
-        --         hl = 'Comment',
-        --         char = {
-        --             corner_top = '╭',
-        --             corner_bottom = '╰',
-        --             horizontal = '─',
-        --             vertical = '│',
-        --             arrow = '─',
-        --         },
-        --     },
-        --     animate = {
-        --         style = 'out',
-        --         duration = {
-        --             step = 20, -- ms per step
-        --             total = 1000, -- maximum duration
-        --         },
-        --     },
-        -- },
-        scroll = {}, -- smooth scrolling
         statuscolumn = {
             left = { 'mark', 'sign' }, -- priority of signs on the left (high to low)
             right = { 'fold', 'git' }, -- priority of signs on the right (high to low)
             folds = {
-                open = false, -- show open fold icons
-                git_hl = false, -- use Git Signs hl for fold icons
+                open = false,          -- show open fold icons
+                git_hl = false,        -- use Git Signs hl for fold icons
             },
             git = {
                 -- patterns to match Git signs
@@ -54,6 +39,34 @@ return {
         },
     },
     keys = {
+        -- Pickers
+        { "<leader><space>", function() Snacks.picker.smart() end,                 desc = "Smart Find Files" },
+
+        -- { "<leader><space>", function() Snacks.picker.files() end,                 desc = "Find Files" },
+        { "<leader>,",       function() Snacks.picker.buffers() end,               desc = "Buffers" },
+        { "<leader>/",       function() Snacks.picker.grep() end,                  desc = "Grep" },
+        { "<leader>gb",      function() Snacks.picker.git_branches() end,          desc = "Git Branches" },
+        { "<leader>gd",      function() Snacks.picker.git_diff() end,              desc = "Git Diff (Hunks)" },
+        -- LSP
+        { "gd",              function() Snacks.picker.lsp_definitions() end,       desc = "Goto Definition" },
+        { "gD",              function() Snacks.picker.lsp_declarations() end,      desc = "Goto Declaration" },
+        { "gr",              function() Snacks.picker.lsp_references() end,        nowait = true,                  desc = "References" },
+        { "gI",              function() Snacks.picker.lsp_implementations() end,   desc = "Goto Implementation" },
+        { "gy",              function() Snacks.picker.lsp_type_definitions() end,  desc = "Goto T[y]pe Definition" },
+        { "<leader>ss",      function() Snacks.picker.lsp_symbols() end,           desc = "LSP Symbols" },
+        { "<leader>sS",      function() Snacks.picker.lsp_workspace_symbols() end, desc = "LSP Workspace Symbols" },
+        {
+            "<leader>sd",
+            function()
+                Snacks.picker.diagnostics({
+                    layout = {
+                        preset = "vertical",
+                        layout = { width = 0.9 },
+                    },
+                })
+            end,
+            desc = "Diagnostics",
+        },
         {
             ']]',
             function()

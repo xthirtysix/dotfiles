@@ -15,11 +15,11 @@ vim.opt.rtp:prepend(lazypath)
 
 local format_sync_grp = vim.api.nvim_create_augroup("GoFormat", {})
 vim.api.nvim_create_autocmd("BufWritePre", {
-  pattern = "*.go",
-  callback = function()
-   require('go.format').goimports()
-  end,
-  group = format_sync_grp,
+    pattern = "*.go",
+    callback = function()
+        require('go.format').goimports()
+    end,
+    group = format_sync_grp,
 })
 
 require('lazy').setup {
@@ -28,4 +28,3 @@ require('lazy').setup {
         { import = 'plugins.themes' },
     },
 }
-

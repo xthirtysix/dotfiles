@@ -42,13 +42,7 @@ vim.keymap.set('n', '<leader>xx', '<Cmd>source %<CR>', { desc = 'Source current 
 vim.keymap.set('n', '<leader>x', '<Cmd>:.lua<CR>', { desc = 'Lua: execute current line' })
 vim.keymap.set('v', '<leader>x', '<Cmd>:lua<CR>', { desc = 'Lua: execute current selection' })
 
--- Pickers
-local pick = require('mini.pick')
-vim.keymap.set('n', '<leader><space>', ':Pick files<CR>', { desc = 'Find files' })
-vim.keymap.set('n', '<leader>/', pick.builtin.grep_live, { desc = 'Grep text' })
-vim.keymap.set('n', '<leader>t', pick.builtin.buffers, { desc = 'Buffers' })
-
 -- LSP
-vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { desc = 'Go to Definition' })
-vim.keymap.set('n', 'gr', vim.lsp.buf.references, { desc = 'Go to References' })
+-- vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { desc = 'Go to Definition' })
+-- vim.keymap.set('n', 'gr', vim.lsp.buf.references, { desc = 'Go to References' })
 vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, { desc = 'Code Action' })

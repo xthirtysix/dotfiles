@@ -2,6 +2,7 @@ return {
     'rebelot/kanagawa.nvim',
     lazy = false,
     priority = 1000,
+    enabled = false,
     config = function()
         local theme = require 'kanagawa'
         theme.setup {

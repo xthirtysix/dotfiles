@@ -9,21 +9,6 @@ return {
                 null_ls.builtins.formatting.shfmt.with {
                     extra_args = { '-ci', '-i=4' },
                 },
-                null_ls.builtins.diagnostics.pmd.with {
-                    filetypes = { 'apex' },
-                    command = { 'pmd' },
-                    args = {
-                        'check',
-                        '--format',
-                        'json',
-                        '--dir',
-                        '$ROOT',
-                        '--rulesets',
-                        'apex_ruleset.xml',
-                        '--no-cache',
-                        '--no-progress',
-                    },
-                },
                 -- Lua
                 null_ls.builtins.formatting.stylua,
                 -- Common

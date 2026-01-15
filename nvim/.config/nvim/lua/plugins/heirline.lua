@@ -32,12 +32,19 @@ return {
         -- --------------------------------------------------
         require('heirline').setup {
             statusline = {
+                condition = function()
+                    return not vim.tbl_contains({
+                        "neotest-summary",
+                        "neotest-output",
+                        "neotest-output-panel",
+                    }, vim.bo.filetype)
+                end,
                 init = function(self)
                     heirline_utils.initMode(self)
                     heirline_utils.initColors(self)
                     heirline_utils.initHasGit(self)
                 end,
-                hl = { bg = '#25273a' },
+                hl = { bg = '#2b2d3a' },
                 Common.Space,
                 ViMode,
                 FileName,

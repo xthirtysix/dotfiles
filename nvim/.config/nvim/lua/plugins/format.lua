@@ -24,23 +24,18 @@ return {
             timeout_ms = 2500,
             lsp_fallback = true,
         },
+        formatters_by_ft = {
+            javascript = { 'prettier' },
+            typescript = { 'prettier' },
+            css = { 'prettier' },
+            html = { 'prettier' },
+            json = { 'prettier' },
+            yaml = { 'prettier' },
+            markdown = { 'prettier' },
+            graphql = { 'prettier' },
+            lua = { 'stylua' },
+            vue = { 'volar', 'prettier' },
+            apex = { 'prettier' },
+        },
     },
-    config = function()
-        local conform = require 'conform'
-        conform.setup {
-            formatters_by_ft = {
-                javascript = { 'prettier' },
-                typescript = { 'prettier' },
-                css = { 'prettier' },
-                html = { 'prettier' },
-                json = { 'prettier' },
-                yaml = { 'prettier' },
-                markdown = { 'prettier' },
-                graphql = { 'prettier' },
-                lua = { 'stylua' },
-                vue = { 'volar', 'prettier' },
-                apex = { 'prettier' },
-            },
-        }
-    end,
 }

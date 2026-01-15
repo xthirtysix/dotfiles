@@ -3,8 +3,9 @@ local utils = require 'heirline.utils'
 
 -- --------------------------------------------------
 -- Colors
--- --------------------------------------------------
-local base = Color.from_hex '#303030'
+-- -- --------------------------------------------------
+-- local base = Color.from_hex '#303030' --catppuccin
+local base = Color.from_hex '#2b2d3a'
 
 local function fade(color, amount)
     amount = amount or 0.01
@@ -76,4 +77,3 @@ return {
     initHasGit = initHasGit,
     initColors = initColors,
 }
-
