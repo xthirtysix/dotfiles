@@ -1,4 +1,4 @@
-local conditions = require 'heirline.conditions'
+local conditions = require('heirline.conditions')
 
 local LinterActive = {
     condition = function(self)
@@ -57,4 +57,3 @@ local LinterActive = {
 }
 
 return LinterActive
-

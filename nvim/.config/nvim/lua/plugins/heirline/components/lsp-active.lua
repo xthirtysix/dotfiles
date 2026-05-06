@@ -1,4 +1,4 @@
-local conditions = require 'heirline.conditions'
+local conditions = require('heirline.conditions')
 
 local LSPActive = {
     condition = conditions.lsp_attached,
@@ -6,7 +6,7 @@ local LSPActive = {
     on_click = {
         callback = function()
             vim.defer_fn(function()
-                vim.cmd 'LspInfo'
+                vim.cmd('LspInfo')
             end, 100)
         end,
         name = 'heirline_LSP',
@@ -34,7 +34,7 @@ local LSPActive = {
         {
             provider = function()
                 local names = {}
-                for _, server in pairs(vim.lsp.get_clients{ bufnr = 0 }) do
+                for _, server in pairs(vim.lsp.get_clients({ bufnr = 0 })) do
                     table.insert(names, server.name)
                 end
                 return ' ' .. table.concat(names, ', ')
@@ -53,4 +53,3 @@ local LSPActive = {
 }
 
 return LSPActive
-

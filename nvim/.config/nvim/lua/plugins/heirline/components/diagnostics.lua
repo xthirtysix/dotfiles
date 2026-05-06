@@ -1,4 +1,4 @@
-local conditions = require 'heirline.conditions'
+local conditions = require('heirline.conditions')
 
 local Diagnostics = {
     condition = conditions.has_diagnostics,

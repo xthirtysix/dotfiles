@@ -40,4 +40,3 @@ local options = {
 for index, value in pairs(options) do
     vim.opt[index] = value
 end
-

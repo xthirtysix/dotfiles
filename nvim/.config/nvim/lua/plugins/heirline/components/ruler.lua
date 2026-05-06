@@ -58,4 +58,3 @@ local Ruler = {
 }
 
 return Ruler
-

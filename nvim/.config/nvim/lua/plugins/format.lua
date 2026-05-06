@@ -6,13 +6,13 @@ return {
         {
             '<leader>f',
             function()
-                local conform = require 'conform'
+                local conform = require('conform')
 
-                conform.format {
+                conform.format({
                     lsp_fallback = true,
                     async = false,
                     timeout_ms = 2500,
-                }
+                })
             end,
             mode = { 'n', 'v' },
             desc = 'Format',
@@ -33,7 +33,6 @@ return {
             yaml = { 'prettier' },
             markdown = { 'prettier' },
             graphql = { 'prettier' },
-            lua = { 'stylua' },
             vue = { 'volar', 'prettier' },
             apex = { 'prettier' },
         },

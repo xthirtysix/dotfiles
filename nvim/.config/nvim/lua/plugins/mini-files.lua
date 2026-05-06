@@ -4,7 +4,7 @@ return {
         {
             '<leader>e',
             function()
-                local MiniFiles = require 'mini.files'
+                local MiniFiles = require('mini.files')
                 local _ = MiniFiles.close() or MiniFiles.open(vim.api.nvim_buf_get_name(0), false)
                 vim.schedule(function()
                     MiniFiles.reveal_cwd()

@@ -1,20 +1,22 @@
 return {
     'nvimtools/none-ls.nvim',
-    dependencies = { 'davidmh/cspell.nvim', 'nvim-lua/plenary.nvim' },
+    dependencies = { 'davidmh/cspell.nvim', 'nvim-lua/plenary.nvim', 'wesleimp/stylua.nvim' },
     config = function()
-        local null_ls = require 'null-ls'
+        local null_ls = require('null-ls')
 
-        null_ls.setup {
+        null_ls.setup({
             sources = {
-                null_ls.builtins.formatting.shfmt.with {
+                null_ls.builtins.formatting.shfmt.with({
                     extra_args = { '-ci', '-i=4' },
-                },
+                }),
                 -- Lua
-                null_ls.builtins.formatting.stylua,
+                null_ls.builtins.formatting.stylua.with({
+                    extra_args = { '--quote-style', 'AutoPreferSingle' },
+                }),
                 -- Common
                 null_ls.builtins.formatting.markdownlint,
                 null_ls.builtins.completion.spell,
             },
-        }
+        })
     end,
 }

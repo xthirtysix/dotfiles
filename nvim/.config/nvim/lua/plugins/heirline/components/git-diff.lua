@@ -1,4 +1,4 @@
-local conditions = require 'heirline.conditions'
+local conditions = require('heirline.conditions')
 
 local GitDiff = {
     condition = conditions.is_git_repo,
@@ -63,4 +63,3 @@ local GitDiff = {
 }
 
 return GitDiff
-

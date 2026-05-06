@@ -10,8 +10,8 @@ return {
             untracked = { text = '┆' },
         },
         signcolumn = true, -- Toggle with `:Gitsigns toggle_signs`
-        numhl = false,     -- Toggle with `:Gitsigns toggle_numhl`
-        linehl = false,    -- Toggle with `:Gitsigns toggle_linehl`
+        numhl = false, -- Toggle with `:Gitsigns toggle_numhl`
+        linehl = false, -- Toggle with `:Gitsigns toggle_linehl`
         word_diff = false, -- Toggle with `:Gitsigns toggle_word_diff`
         watch_gitdir = {
             follow_files = true,
@@ -38,7 +38,7 @@ return {
             col = 1,
         },
         on_attach = function(bufnr)
-            local gitsigns = require 'gitsigns'
+            local gitsigns = require('gitsigns')
 
             local function map(mode, l, r, opts)
                 opts = opts or {}
@@ -49,19 +49,19 @@ return {
             -- Navigation
             map('n', 'gj', function()
                 if vim.wo.diff then
-                    vim.cmd.normal { 'gj', bang = true }
+                    vim.cmd.normal({ 'gj', bang = true })
                 else
-                    gitsigns.nav_hunk 'next'
+                    gitsigns.nav_hunk('next')
                 end
             end)
 
             map('n', 'gk', function()
                 if vim.wo.diff then
-                    vim.cmd.normal { 'gk', bang = true }
+                    vim.cmd.normal({ 'gk', bang = true })
                 else
-                    gitsigns.nav_hunk 'prev'
+                    gitsigns.nav_hunk('prev')
                 end
             end)
         end,
-    }
+    },
 }

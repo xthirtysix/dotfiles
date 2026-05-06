@@ -3,7 +3,7 @@ return {
     event = 'VeryLazy',
     dependencies = {
         'MunifTanjim/nui.nvim',
-        { 'rcarriga/nvim-notify', opts = { max_width = 70, render = 'wrapped-compact' } }
+        { 'rcarriga/nvim-notify', opts = { max_width = 70, render = 'wrapped-compact' } },
     },
     opts = {
         lsp = {

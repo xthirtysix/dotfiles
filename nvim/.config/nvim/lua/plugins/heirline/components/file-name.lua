@@ -1,4 +1,4 @@
-local conditions = require 'heirline.conditions'
+local conditions = require('heirline.conditions')
 
 local FileName = {
     update = {
@@ -16,12 +16,14 @@ local FileName = {
         local filename = self.filename
 
         -- Заменяем пути /Users/{username} на ~
-        if filename:match("^/Users/[^/]+") then
-            filename = filename:gsub("^/Users/[^/]+", "~")
+        if filename:match('^/Users/[^/]+') then
+            filename = filename:gsub('^/Users/[^/]+', '~')
         end
 
         -- self.filename = vim.fn.fnamemodify(filepath, ':.')
-        if filename == "" then return "[No Name]" end
+        if filename == '' then
+            return '[No Name]'
+        end
         if not conditions.width_percent_below(#filename, 0.25) then
             filename = vim.fn.pathshorten(filename)
         end

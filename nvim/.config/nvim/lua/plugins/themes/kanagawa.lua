@@ -4,8 +4,8 @@ return {
     priority = 1000,
     enabled = false,
     config = function()
-        local theme = require 'kanagawa'
-        theme.setup {
+        local theme = require('kanagawa')
+        theme.setup({
             compile = false,
             undercurl = true,
             commentStyle = { italic = true },
@@ -42,9 +42,8 @@ return {
                     MasonNormal = { bg = colorScheme.ui.bg_m3, fg = colorScheme.ui.fg_dim },
                 }
             end,
-        }
-        vim.cmd 'colorscheme kanagawa'
-        vim.cmd 'highlight FloatBorder guibg=NONE'
+        })
+        vim.cmd('colorscheme kanagawa')
+        vim.cmd('highlight FloatBorder guibg=NONE')
     end,
 }
-

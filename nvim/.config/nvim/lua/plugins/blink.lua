@@ -13,7 +13,7 @@ return {
                 },
                 fallback_highlight = '@variable',
                 max_width = 40,
-            }
+            },
         },
     },
     version = '*',

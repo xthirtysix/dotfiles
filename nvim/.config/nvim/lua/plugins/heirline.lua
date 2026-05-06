@@ -9,34 +9,34 @@ return {
     opts = {},
     enabled = true,
     config = function(_, opts)
-        local heirline = require 'heirline'
+        local heirline = require('heirline')
 
         -- Import utilities
-        local heirline_utils = require 'plugins.heirline.heirline-utils'
+        local heirline_utils = require('plugins.heirline.heirline-utils')
 
         -- Import components
-        local ViMode = require 'plugins.heirline.components.vi-mode'
-        local FileName = require 'plugins.heirline.components.file-name'
-        local Git = require 'plugins.heirline.components.git'
-        local GitDiff = require 'plugins.heirline.components.git-diff'
-        local Diagnostics = require 'plugins.heirline.components.diagnostics'
-        local LSPActive = require 'plugins.heirline.components.lsp-active'
-        local LinterActive = require 'plugins.heirline.components.linter-active'
-        local Ruler = require 'plugins.heirline.components.ruler'
-        local Common = require 'plugins.heirline.components.common'
+        local ViMode = require('plugins.heirline.components.vi-mode')
+        local FileName = require('plugins.heirline.components.file-name')
+        local Git = require('plugins.heirline.components.git')
+        local GitDiff = require('plugins.heirline.components.git-diff')
+        local Diagnostics = require('plugins.heirline.components.diagnostics')
+        local LSPActive = require('plugins.heirline.components.lsp-active')
+        local LinterActive = require('plugins.heirline.components.linter-active')
+        local Ruler = require('plugins.heirline.components.ruler')
+        local Common = require('plugins.heirline.components.common')
 
         heirline.setup(opts)
 
         -- --------------------------------------------------
         -- Plugin init
         -- --------------------------------------------------
-        require('heirline').setup {
+        require('heirline').setup({
             statusline = {
                 condition = function()
                     return not vim.tbl_contains({
-                        "neotest-summary",
-                        "neotest-output",
-                        "neotest-output-panel",
+                        'neotest-summary',
+                        'neotest-output',
+                        'neotest-output-panel',
                     }, vim.bo.filetype)
                 end,
                 init = function(self)
@@ -65,7 +65,6 @@ return {
             opts = {
                 colors = heirline_utils.colors,
             },
-        }
+        })
     end,
 }
-

@@ -1,11 +1,11 @@
 return {
-    "catppuccin/nvim",
-    name = "catppuccin",
+    'catppuccin/nvim',
+    name = 'catppuccin',
     priority = 1000,
     enabled = false,
     config = function()
-        require("catppuccin").setup {
-            flavour = "macchiato",
-        }
-    end
+        require('catppuccin').setup({
+            flavour = 'macchiato',
+        })
+    end,
 }

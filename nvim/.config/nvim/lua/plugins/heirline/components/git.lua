@@ -11,7 +11,7 @@ local Git = {
     on_click = {
         callback = function()
             vim.defer_fn(function()
-                vim.cmd 'lua Snacks.picker.git_branches()'
+                vim.cmd('lua Snacks.picker.git_branches()')
             end, 100)
         end,
         name = 'heirline_git',
@@ -25,9 +25,9 @@ local Git = {
     },
 
     init = function(self)
-        local head_message = vim.fn.system 'git rev-parse --abbrev-ref HEAD'
+        local head_message = vim.fn.system('git rev-parse --abbrev-ref HEAD')
         if string.find(head_message, 'fatal') then
-            self.current_dir_head = vim.fn.system 'git branch --show-current' .. ' (no origin)'
+            self.current_dir_head = vim.fn.system('git branch --show-current') .. ' (no origin)'
         else
             self.current_dir_head = head_message
         end
@@ -61,4 +61,3 @@ local Git = {
 }
 
 return Git
-
