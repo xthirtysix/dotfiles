@@ -1,7 +1,7 @@
 # Font
 font-thicken = false
-font-family = "Martian Mono"
-font-style = "Cn Lt"
+font-family = "Martian Mono VF"
+font-style = "100 350"
 font-size = 13
 adjust-cell-height = 20%
 
@@ -79,5 +79,5 @@ unfocused-split-opacity = 1.0
 # Icon
 macos-icon = custom-style
 macos-icon-frame = plastic
-macos-icon-ghost-color = #eb6f92
-macos-icon-screen-color = #31748f
+macos-icon-ghost-color = #958554
+macos-icon-screen-color = #746e38,#335a78
