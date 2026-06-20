@@ -8,9 +8,10 @@ export PATH="$PATH:$HOME/bin"
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/bin:/usr/local/bin:$PATH"
 export PATH="$PATH:/opt/homebrew/bin"
-export GOPATH="$HOME/Projects/go"
-export PATH="$PATH:$GOPATH/src"
 export PATH="$PATH:$HOME/.spoof-dpi/bin"
+export GOPATH="$HOME/.go"
+export GOBIN="$GOPATH/bin"
+export PATH="$PATH:$GOBIN"
 
 #######
 # nvm #
@@ -81,3 +82,8 @@ alias nx="npx nx"
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+alias czg="czg --config ~/.czrc"
+export PATH="$(pnpm bin -g):$PATH"
+
+# Added by Antigravity IDE
+export PATH="/Users/x36/.antigravity-ide/antigravity-ide/bin:$PATH"
