@@ -17,12 +17,15 @@ get_ssid() {
       ;;
 
     Darwin)
-      if system_profiler SPAirPortDataType | awk '/Current Network Information:/ { getline; print substr($0, 13, (length($0) - 13)); exit }' | cut -d ':' -f 2 | sed 's/^[[:blank:]]*//g' &> /dev/null; then
-        echo "$(system_profiler SPAirPortDataType | awk '/Current Network Information:/ { getline; print substr($0, 13, (length($0) - 13)); exit }')" | sed 's/^[[:blank:]]*//g'
-      else
-        echo 'Ethernet'
-      fi
-      ;;
+        # Получаем SSID с помощью sudo
+        SSID=$(ipconfig getsummary en0 2>/dev/null | awk -F ': ' '/ SSID/ {print $2}')
+    
+        if [ -n "$SSID" ] && [ "$SSID" != "<redacted>" ]; then
+            printf '%s' "$SSID"
+        else
+            echo 'No Wi-Fi'
+        fi
+        ;;
 
     CYGWIN*|MINGW32*|MSYS*|MINGW*)
       # leaving empty - TODO - windows compatability
