@@ -1,4 +1,5 @@
 vim.lsp.enable({ 'lua_ls', 'tailwindcss', 'vue_ls', 'vtsls', 'gopls', 'stylelint_lsp' })
+vim.lsp.config('vtsls', dofile(vim.fn.stdpath('config') .. '/lsp/vtsls.lua'))
 
 vim.api.nvim_create_autocmd('LspAttach', {
     callback = function(ev)
