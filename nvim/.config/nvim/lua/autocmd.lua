@@ -1,0 +1,27 @@
+local group = vim.api.nvim_create_augroup("UserConfig", { clear = true })
+
+vim.api.nvim_create_autocmd("TextYankPost", {
+  group = group,
+  callback = function()
+    vim.hl.on_yank()
+  end,
+})
+
+-- для коммитов/ребейзов позиция курсора с прошлого раза не нужна
+local no_restore = { gitcommit = true, gitrebase = true }
+
+vim.api.nvim_create_autocmd("BufReadPost", {
+  group = group,
+  callback = function(args)
+    if no_restore[vim.bo[args.buf].filetype] then
+      return
+    end
+
+    local mark = vim.api.nvim_buf_get_mark(args.buf, '"')
+    local line_count = vim.api.nvim_buf_line_count(args.buf)
+
+    if mark[1] > 0 and mark[1] <= line_count then
+      pcall(vim.api.nvim_win_set_cursor, 0, mark)
+    end
+  end,
+})
