@@ -81,42 +81,44 @@ battery_status() {
 
     case $status in
         discharging | Discharging)
-            echo ''
-            ;;
-        high | Full)
-            echo ''
+            echo 'discharging'
             ;;
         charging | Charging)
-            echo 'AC'
+            echo 'charging'
+            ;;
+        charged | high | Full | finishingcharge)
+            echo 'charged'
             ;;
         *)
-            echo 'AC'
+            echo 'ac'
             ;;
     esac
 }
 
+# Material Design battery icons (nf-md-battery_*), index = percent rounded up to tens
+discharging_icons=('󰂎' '󰁺' '󰁻' '󰁼' '󰁽' '󰁾' '󰁿' '󰂀' '󰂁' '󰂂' '󰁹')
+charging_icon=''
+
 main() {
-    bat_label=''
     bat_stat=$(battery_status)
     bat_perc=$(battery_percent)
     bat_perc_num=${bat_perc%%%}
 
-    if [ -z "$bat_stat" ]; then # Test if status is empty or not
-        if [ "$bat_perc_num" -le 10 ]; then
-            bat_label=''
-        elif [ "$bat_perc_num" -le 25 ]; then
-            bat_label=''
-        elif [ "$bat_perc_num" -le 50 ]; then
-            bat_label=''
-        elif [ "$bat_perc_num" -le 75 ]; then
-            bat_label=''
-        fi
-        echo "$bat_label  $bat_perc"
-    elif [ -z "$bat_perc" ]; then # In case it is a desktop with no battery percent, only AC power
-        echo ""
-    else
-        echo "  $bat_perc"
+    # desktop with no battery percent, only AC power
+    if [ -z "$bat_perc_num" ]; then
+        echo "$charging_icon"
+        return
     fi
+
+    level=$(((bat_perc_num + 9) / 10))
+    [ $level -gt 10 ] && level=10
+
+    case $bat_stat in
+        discharging) bat_label=${discharging_icons[$level]} ;;
+        *) bat_label=$charging_icon ;;
+    esac
+
+    echo "$bat_label $bat_perc"
 }
 
 #run main driver program

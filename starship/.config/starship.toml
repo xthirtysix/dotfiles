@@ -1,7 +1,7 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
 format = """
-[](red)\
+ [](red)\
 $os\
 [](bg:yellow fg:red)\
 $directory\
@@ -18,9 +18,10 @@ $python\
 [ ](fg:green)\
 $cmd_duration\
 $line_break\
-$character"""
+[ ](fg:red)$character"""
 
-palette = "sonokai_andromeda"
+# ANSI colors: resolved by the terminal palette (same as tmux @theme-palette terminal)
+palette = "terminal"
 
 [os]
 disabled = false
@@ -155,8 +156,36 @@ show_milliseconds = true
 format = " in $duration "
 style = "bg:lavender"
 disabled = false
-show_notifications = true
+show_notifications = false
 min_time_to_notify = 45000
+
+[palettes.terminal]
+rosewater = "bright-red"
+flamingo = "bright-red"
+pink = "purple"
+mauve = "purple"
+red = "red"
+maroon = "red"
+peach = "bright-red"
+yellow = "yellow"
+green = "green"
+teal = "cyan"
+sky = "bright-cyan"
+sapphire = "cyan"
+blue = "blue"
+lavender = "bright-purple"
+text = "white"
+subtext1 = "white"
+subtext0 = "white"
+overlay2 = "bright-black"
+overlay1 = "bright-black"
+overlay0 = "bright-black"
+surface2 = "bright-black"
+surface1 = "bright-black"
+surface0 = "bright-black"
+base = "black"
+mantle = "black"
+crust = "black"
 
 [palettes.catppuccin_mocha]
 rosewater = "#f5e0dc"

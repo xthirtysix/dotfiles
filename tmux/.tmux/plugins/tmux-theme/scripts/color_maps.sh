@@ -1,9 +1,28 @@
 set_theme() {
     case $1 in
+        # ANSI colors: the terminal (Ghostty/pywal palette) resolves them,
+        # 'default' = terminal's own foreground/background
+        terminal)
+            bg=default
+            white=default
+            gray=brightblack
+            dark_gray=black
+            light_purple=brightmagenta
+            dark_purple=magenta
+            cyan=cyan
+            green=green
+            light_green=green
+            orange=brightred
+            red=red
+            pink=magenta
+            yellow=yellow
+            blue=blue
+            ;;
         rosepine)
             white=$rosepine_text
             gray=$rosepine_surface
             dark_gray=$rosepine_base
+            bg=$rosepine_base
             light_purple=$rosepine_rose
             dark_purple=$rosepine_base
             cyan=$rosepine_foam
@@ -19,6 +38,7 @@ set_theme() {
             white=$wave_text
             gray=$wave_surface
             dark_gray=$wave_base
+            bg=$wave_base
             light_purple=$wave_pink
             dark_purple=$wave_base
             cyan=$wave_cyan
@@ -34,6 +54,7 @@ set_theme() {
             white=$catppuccin_text
             gray=$catppuccin_surface0
             dark_gray=$catppuccin_base
+            bg=$catppuccin_base
             light_purple=$catppuccin_rosewater
             dark_purple=$catppuccin_base
             cyan=$catppuccin_blue
@@ -49,6 +70,7 @@ set_theme() {
             white=$sonokai_text
             gray=$sonokai_surface
             dark_gray=$sonokai_base
+            bg=$sonokai_base
             light_purple=$sonokai_purple
             dark_purple=$sonokai_dark
             cyan=$sonokai_blue

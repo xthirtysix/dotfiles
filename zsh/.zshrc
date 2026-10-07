@@ -17,8 +17,13 @@ export PATH="$PATH:$GOBIN"
 # nvm #
 #######
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# lazy-load: nvm.sh is sourced on first `nvm` call
+nvm() {
+  unfunction nvm
+  [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+  [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
+  nvm "$@"
+}
 
 ########
 # pnpm #
@@ -51,11 +56,14 @@ alias ls="eza -l --icons -TL1 --git"
 alias cat="bat --style plain"
 
 eval $(/opt/homebrew/bin/brew shellenv)
-eval $(thefuck --alias)
-eval $(starship init zsh)
 eval ___MY_VMOPTIONS_SHELL_FILE="${HOME}/.jetbrains.vmoptions.sh"; if [ -f "${___MY_VMOPTIONS_SHELL_FILE}" ]; then . "${___MY_VMOPTIONS_SHELL_FILE}"; fi
-eval $(thefuck --alias)
 eval "$(zoxide init zsh)"
+# lazy-load: thefuck alias is generated on first `fuck` call
+fuck() {
+  unfunction fuck
+  eval "$(thefuck --alias)"
+  fuck "$@"
+}
 
 ##############################
 # tabtab source for packages #
@@ -68,7 +76,7 @@ eval "$(zoxide init zsh)"
 # [[ -f "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh" ]] && builtin source "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh"
 
 # pnpm
-export PNPM_HOME="/Users/x36/Library/pnpm"
+export PNPM_HOME="$HOME/Library/pnpm"
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
@@ -77,13 +85,13 @@ esac
 alias nx="npx nx"
 
 # bun completions
-[ -s "/Users/x36/.bun/_bun" ] && source "/Users/x36/.bun/_bun"
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 alias czg="czg --config ~/.czrc"
-export PATH="$(pnpm bin -g):$PATH"
+
 
 # Added by Antigravity IDE
-export PATH="/Users/x36/.antigravity-ide/antigravity-ide/bin:$PATH"
+export PATH="$HOME/.antigravity-ide/antigravity-ide/bin:$PATH"

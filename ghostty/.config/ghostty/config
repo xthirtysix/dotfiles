@@ -44,28 +44,29 @@ copy-on-select = clipboard
 # cursor-color = #f5e0dc
 # selection-background = #45475a
 # selection-foreground = #cdd6f4
-background = #2b2d3a
-foreground = #e1e3e4
-selection-background = #393e53
-selection-foreground = #e1e3e4
-cursor-color = #e1e3e4
-cursor-text = #2b2d3a
-palette = 0=#181a1c
-palette = 1=#fb617e
-palette = 2=#9ed06c
-palette = 3=#edc763
-palette = 4=#6dcae8
-palette = 5=#bb97ee
-palette = 6=#f89860
-palette = 7=#e1e3e4
-palette = 8=#7e8294
-palette = 9=#fb617e
-palette = 10=#9ed06c
-palette = 11=#edc763
-palette = 12=#6dcae8
-palette = 13=#bb97ee
-palette = 14=#f89860
-palette = 15=#e1e3e4
+# Ayu Mirage
+background = #1f2430
+foreground = #cccac2
+selection-background = #409fff
+selection-foreground = #1f2430
+cursor-color = #ffcc66
+cursor-text = #1f2430
+palette = 0=#171b24
+palette = 1=#ed8274
+palette = 2=#87d96c
+palette = 3=#facc6e
+palette = 4=#6dcbfa
+palette = 5=#dabafa
+palette = 6=#90e1c6
+palette = 7=#c7c7c7
+palette = 8=#686868
+palette = 9=#f28779
+palette = 10=#d5ff80
+palette = 11=#ffd173
+palette = 12=#73d0ff
+palette = 13=#dfbfff
+palette = 14=#95e6cb
+palette = 15=#ffffff
 
 background-opacity = 1
 background-blur-radius = 20
@@ -81,3 +82,6 @@ macos-icon = custom-style
 macos-icon-frame = plastic
 macos-icon-ghost-color = #958554
 macos-icon-screen-color = #746e38,#335a78
+
+# pywal colors (overrides palette above; "?" = optional) — disabled for Ayu Mirage
+# config-file = ?/Users/x36/.cache/wal/ghostty.conf

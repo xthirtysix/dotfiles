@@ -12,36 +12,27 @@ IFS=' ' read -r -a no_repo_message <<<$(get_tmux_option "@theme-git-no-repo-mess
 IFS=' ' read -r -a no_untracked_files <<<$(get_tmux_option "@theme-git-no-untracked-files" "false")
 IFS=' ' read -r -a show_remote_status <<<$(get_tmux_option "@theme-git-show-remote-status" "false")
 
-# Get added, modified, updated and deleted files from git status
+# Get added and deleted lines (staged + unstaged) relative to HEAD, like gitsigns
 getChanges() {
     declare -i added=0
-    declare -i modified=0
-    declare -i updated=0
     declare -i deleted=0
 
-    for i in $(git -C $path --no-optional-locks status -s); do
-        case $i in
-            'A')
-                added+=1
-                ;;
-            'M')
-                modified+=1
-                ;;
-            'U')
-                updated+=1
-                ;;
-            'D')
-                deleted+=1
-                ;;
+    if git -C $path rev-parse --verify -q HEAD >/dev/null; then
+        base="HEAD"
+    else
+        # fresh repo without commits: diff against the empty tree
+        base=$(git -C $path hash-object -t tree /dev/null)
+    fi
 
-        esac
-    done
+    while read -r a d _; do
+        # binary files are reported as "-"
+        [[ $a =~ ^[0-9]+$ ]] && added+=$a
+        [[ $d =~ ^[0-9]+$ ]] && deleted+=$d
+    done < <(git -C $path --no-optional-locks diff --numstat "$base")
 
     output=""
-    [ $added -gt 0 ] && output+="[ ${added}]"
-    [ $modified -gt 0 ] && output+=" [ ${modified}]"
-    [ $updated -gt 0 ] && output+=" [ ${updated}]"
-    [ $deleted -gt 0 ] && output+=" [ ${deleted}]"
+    [ $added -gt 0 ] && output+=" ${added}"
+    [ $deleted -gt 0 ] && output+="  ${deleted}"
 
     echo $output
 }

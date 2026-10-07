@@ -69,4 +69,13 @@ return {
 			},
 		},
 	},
+
+	-- закрывает скобки и по <CR> внутри {|} разносит их на строки с отступом
+	{
+		"windwp/nvim-autopairs",
+		event = "InsertEnter",
+		opts = {
+			check_ts = true,
+		},
+	},
 }

@@ -18,7 +18,7 @@ main() {
 
     # set configuration option variables
     show_powerline=$(get_tmux_option "@theme-show-powerline" false)
-    status_bg=$(get_tmux_option "@theme-status-bg" dark_gray)
+    status_bg=$(get_tmux_option "@theme-status-bg" bg)
 
     # left icon area
     left_icon=$(get_tmux_option "@theme-left-icon" session)
@@ -43,6 +43,7 @@ main() {
     show_ssh_session_port=$(get_tmux_option "@theme-show-ssh-session-port" false)
     IFS=' ' read -r -a plugins <<<$(get_tmux_option "@theme-plugins" "battery network weather")
     show_empty_plugins=$(get_tmux_option "@theme-show-empty-plugins" true)
+    edge_padding=$(get_tmux_option "@theme-edge-padding" 1)
 
     # Handle left icon configuration
     case $left_icon in
@@ -89,8 +90,26 @@ main() {
         window_right_sep=''
     fi
 
+    # Handle left icon margin
+    icon_mg_r=""
+    if [ "$left_icon_margin_right" -gt "0" ]; then
+        icon_mg_r="$(printf '%*s' $left_icon_margin_right)"
+    fi
+
+    # Transparent gap between the status bar content and the screen edges
+    edge_pd=""
+    if [ "$edge_padding" -gt "0" ]; then
+        edge_pd="$(printf '%*s' $edge_padding)"
+    fi
+
+    # Rounded cap on the far left of the status bar
+    left_cap=""
+    if $show_powerline; then
+        left_cap="#{?client_prefix,#[fg=${!left_icon_prefix_bg}],#[fg=${!left_icon_bg}]}#[bg=${!status_bg}]${right_sep}"
+    fi
+
     # Left icon, with prefix status
-    tmux set-option -g status-left "#{?client_prefix,#[fg=${!left_icon_prefix_fg}],#[fg=${!left_icon_fg}]}#{?client_prefix,#[bg=${!left_icon_prefix_bg}],#[bg=${!left_icon_bg}]}${icon_pd_l}${left_icon_content}${icon_pd_r}#{?client_prefix,#[fg=${!left_icon_prefix_bg}],#[fg=${!left_icon_bg}]}#[bg=${!left_icon_fg}]${left_sep}${icon_mg_r}"
+    tmux set-option -g status-left "#[bg=${!status_bg}]${edge_pd}${left_cap}#{?client_prefix,#[fg=${!left_icon_prefix_fg}],#[fg=${!left_icon_fg}]}#{?client_prefix,#[bg=${!left_icon_prefix_bg}],#[bg=${!left_icon_bg}]}${icon_pd_l}${left_icon_content}${icon_pd_r}#{?client_prefix,#[fg=${!left_icon_prefix_bg}],#[fg=${!left_icon_bg}]}#[bg=${!status_bg}]${left_sep}${icon_mg_r}"
     powerbg=${!status_bg}
 
     # Set timezone unless hidden by configuration
@@ -143,12 +162,6 @@ main() {
 
     # status bar
     tmux set-option -g status-style "bg=${!status_bg},fg=${white}"
-
-    # Handle left icon margin
-    icon_mg_r=""
-    if [ "$left_icon_margin_right" -gt "0" ]; then
-        icon_mg_r="$(printf '%*s' $left_icon_margin_right)"
-    fi
 
     # Status right
     tmux set-option -g status-right ""
@@ -218,34 +231,55 @@ main() {
             continue
         fi
 
+        # git segment is hidden when the pane is not inside a repository
+        hide_empty=false
+        if [ $plugin = "git" ] || ! $show_empty_plugins; then
+            hide_empty=true
+        fi
+
         if $show_powerline; then
-            if $show_empty_plugins; then
-                tmux set-option -ga status-right "#[fg=${!colors[0]},bg=${powerbg},nobold,nounderscore,noitalics]${right_sep}#[fg=${!colors[1]},bg=${!colors[0]}] $script "
+            # styles are split into separate #[] blocks: commas would break #{?...}
+            segment="#[fg=${!colors[0]}]#[bg=${powerbg}]#[nobold]#[nounderscore]#[noitalics]${right_sep}#[fg=${!colors[1]}]#[bg=${!colors[0]}] $script "
+            fallback=""
+
+            # Rounded cap on the far right of the status bar
+            if [ "$plugin" = "${plugins[${#plugins[@]}-1]}" ]; then
+                segment+="#[fg=${!colors[0]}]#[bg=${!status_bg}]${left_sep}"
+                if [ "$powerbg" != "${!status_bg}" ]; then
+                    fallback="#[fg=${powerbg}]#[bg=${!status_bg}]${left_sep}"
+                fi
+            fi
+
+            if $hide_empty; then
+                tmux set-option -ga status-right "#{?#{==:$script,},$fallback,$segment}"
             else
-                tmux set-option -ga status-right "#{?#{==:$script,},,#[fg=${!colors[0]},nobold,nounderscore,noitalics]${right_sep}#[fg=${!colors[1]},bg=${!colors[0]}] $script }"
+                tmux set-option -ga status-right "$segment"
             fi
             powerbg=${!colors[0]}
         else
-            if $show_empty_plugins; then
-                tmux set-option -ga status-right "#[fg=${!colors[1]},bg=${!colors[0]}] $script "
+            if $hide_empty; then
+                tmux set-option -ga status-right "#{?#{==:$script,},,#[fg=${!colors[1]}]#[bg=${!colors[0]}] $script }"
             else
-                tmux set-option -ga status-right "#{?#{==:$script,},,#[fg=${!colors[1]},bg=${!colors[0]}] $script }"
+                tmux set-option -ga status-right "#[fg=${!colors[1]},bg=${!colors[0]}] $script "
             fi
         fi
     done
 
+    tmux set-option -ga status-right "#[bg=${!status_bg}]${edge_pd}"
+
     # Window option
     if $show_powerline; then
-        tmux set-window-option -g window-status-current-format "#[fg=${dark_gray},bg=${red}]${left_sep}#[fg=${gray},bg=${red}] #I #W${current_flags} #[fg=${red},bg=${dark_gray}]${left_sep}"
+        current_window_color=$(get_tmux_option "@theme-current-window-color" "red")
+        tmux set-window-option -g window-status-current-format "#[fg=${!current_window_color},bg=${!status_bg},reverse]${left_sep}#[noreverse,fg=${dark_gray},bg=${!current_window_color}] #I #W${current_flags} #[fg=${!current_window_color},bg=${!status_bg}]${left_sep}"
     else
         tmux set-window-option -g window-status-current-format "#[fg=${white},bg=${dark_purple}] #I #W${current_flags} "
     fi
 
     if ! $ignore_window_colors; then
-        tmux set-window-option -g window-style "fg=${white},bg=${dark_gray}"
+        tmux set-window-option -g window-style "fg=${white},bg=${bg}"
     fi
 
-    tmux set-window-option -g window-status-format "#[fg=${text}]#[bg=${dark_gray}] #I #W${flags}"
+    tmux set-window-option -g window-status-format "#[fg=${white},bg=${!status_bg}] #I #W${flags}"
     tmux set-window-option -g window-status-activity-style "bold"
     tmux set-window-option -g window-status-bell-style "bold"
 }
