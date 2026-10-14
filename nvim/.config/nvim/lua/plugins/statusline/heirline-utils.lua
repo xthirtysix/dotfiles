@@ -58,6 +58,7 @@ M.mode_colors = {
 function M.colors()
 	current = {
 		bg = get("bg", "Normal", "StatusLine") or fallback_bg,
+		fg = get("fg", "Normal", "StatusLine"),
 		bright_bg = get("bg", "Folded"),
 		bright_fg = get("fg", "Folded"),
 

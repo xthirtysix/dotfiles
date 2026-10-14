@@ -15,6 +15,20 @@ return {
 			},
 
 			numhl = true,
+
+			-- blame нужен только для statusline (vim.b.gitsigns_blame_line_dict), без virtual text
+			current_line_blame = true,
+			current_line_blame_opts = {
+				virt_text = false,
+				delay = 150,
+			},
+			-- formatter вызывается при получении blame: перерисовываем statusline, иначе текст появится лишь при следующем redraw
+			current_line_blame_formatter = function(_, blame_info)
+				vim.schedule(function()
+					vim.cmd.redrawstatus()
+				end)
+				return { { blame_info.summary or "", "GitSignsCurrentLineBlame" } }
+			end,
 			linehl = false,
 			word_diff = false,
 

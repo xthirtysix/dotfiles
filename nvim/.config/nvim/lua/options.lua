@@ -48,6 +48,21 @@ opt.completeopt = {
 opt.scrolloff = 8
 opt.sidescrolloff = 8
 
+-- ru-раскладка для встроенных команд normal mode; маппинги переводит langmapper
+local function escape_langmap(str)
+	return vim.fn.escape(str, [[;,."|\]])
+end
+
+local en = [[`qwertyuiop[]asdfghjkl;'zxcvbnm]]
+local ru = [[ёйцукенгшщзхъфывапролджэячсмить]]
+local en_shift = [[~QWERTYUIOP{}ASDFGHJKL:"ZXCVBNM<>]]
+local ru_shift = [[ËЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ]]
+
+opt.langmap = table.concat({
+	escape_langmap(ru_shift) .. ";" .. escape_langmap(en_shift),
+	escape_langmap(ru) .. ";" .. escape_langmap(en),
+}, ",")
+
 -- после старта: поиск clipboard-провайдера не тормозит запуск
 vim.schedule(function()
 	opt.clipboard = "unnamedplus"

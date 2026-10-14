@@ -14,6 +14,7 @@ return {
 		local Git = require("plugins.statusline.components.git")
 		local GitDiff = require("plugins.statusline.components.git-diff")
 		local Diagnostics = require("plugins.statusline.components.diagnostics")
+		local GitBlame = require("plugins.statusline.components.git-blame")
 		local LSPActive = require("plugins.statusline.components.lsp-active")
 		local Ruler = require("plugins.statusline.components.ruler")
 
@@ -35,6 +36,7 @@ return {
 				Common.Space,
 				Diagnostics,
 				Common.Align,
+				GitBlame,
 				LSPActive,
 				Ruler,
 				Common.Space,

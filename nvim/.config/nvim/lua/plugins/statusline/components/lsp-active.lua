@@ -1,4 +1,5 @@
 local conditions = require("heirline.conditions")
+local blame_state = require("plugins.statusline.git-blame-state")
 
 local LSPActive = {
 	condition = conditions.lsp_attached,
@@ -12,14 +13,7 @@ local LSPActive = {
 		name = "heirline_LSP",
 	},
 
-	update = {
-		"LspAttach",
-		"LspDetach",
-		"DirChanged",
-		"BufWritePost",
-		"BufEnter",
-		"ModeChanged",
-	},
+	-- без update: фон левого края зависит от blame строки под курсором и должен пересчитываться на каждом redraw
 
 	flexible = 20,
 
@@ -27,8 +21,10 @@ local LSPActive = {
 
 		{
 			provider = "█",
+			-- за скруглением фон pill git blame, если он активен: блоки стыкуются
 			hl = function(self)
-				return { fg = self.color_dark }
+				local bg = blame_state.current() and blame_state.pill_bg(self.color_bright) or "NONE"
+				return { fg = self.color_dark, bg = bg }
 			end,
 		},
 		{

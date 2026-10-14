@@ -7,6 +7,11 @@ return {
 			preset = "modern",
 			delay = 300,
 
+			-- скрываем ru-дубли от langmapper, чтобы не двоились в подсказках
+			filter = function(mapping)
+				return not (mapping.desc and mapping.desc:find("LM (", 1, true))
+			end,
+
 			spec = {
 				{ "<leader>s", group = "Search" },
 				{ "<leader>g", group = "Git" },
