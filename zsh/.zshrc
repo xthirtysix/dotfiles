@@ -37,6 +37,13 @@ export PATH="$PNPM_HOME:$PATH"
 # eval SFDX_AC_ZSH_SETUP_PATH=$HOME/Library/Caches/sfdx/autocomplete/zsh_setup && test -f $SFDX_AC_ZSH_SETUP_PATH && source $SFDX_AC_ZSH_SETUP_PATH;
 # eval SF_AC_ZSH_SETUP_PATH=$HOME/Library/Caches/sf/autocomplete/zsh_setup && test -f $SF_AC_ZSH_SETUP_PATH && source $SF_AC_ZSH_SETUP_PATH;
 
+##############
+# completion #
+##############
+# brew shellenv adds Homebrew site-functions to fpath; compinit must run before fzf-tab
+[ -x /opt/homebrew/bin/brew ] && eval "$(/opt/homebrew/bin/brew shellenv)"
+autoload -Uz compinit && compinit
+
 ############################
 # created by Zap installer #
 ############################
@@ -55,7 +62,6 @@ alias vim="nvim"
 alias ls="eza -l --icons -TL1 --git" 
 alias cat="bat --style plain"
 
-eval $(/opt/homebrew/bin/brew shellenv)
 eval ___MY_VMOPTIONS_SHELL_FILE="${HOME}/.jetbrains.vmoptions.sh"; if [ -f "${___MY_VMOPTIONS_SHELL_FILE}" ]; then . "${___MY_VMOPTIONS_SHELL_FILE}"; fi
 eval "$(zoxide init zsh)"
 # lazy-load: thefuck alias is generated on first `fuck` call
