@@ -52,6 +52,7 @@ vim.lsp.enable({
 	"vue_ls",
 	"eslint",
 	"cssls",
+	"emmet_language_server",
 	"yamlls",
 	"gopls",
 	"nginx_language_server",
