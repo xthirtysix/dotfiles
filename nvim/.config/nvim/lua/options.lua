@@ -12,6 +12,8 @@ opt.showmode = false
 opt.laststatus = 3
 opt.winborder = "rounded"
 
+require("core.ui2")
+
 opt.expandtab = true
 opt.shiftwidth = 2
 opt.tabstop = 2
@@ -20,7 +22,6 @@ opt.smartindent = true
 opt.breakindent = true
 opt.wrap = false
 
--- foldexpr задаёт treesitter; без этого файлы открываются свёрнутыми
 opt.foldlevel = 99
 opt.foldlevelstart = 99
 
@@ -48,7 +49,6 @@ opt.completeopt = {
 opt.scrolloff = 8
 opt.sidescrolloff = 8
 
--- ru-раскладка для встроенных команд normal mode; маппинги переводит langmapper
 local function escape_langmap(str)
 	return vim.fn.escape(str, [[;,."|\]])
 end
@@ -63,7 +63,6 @@ opt.langmap = table.concat({
 	escape_langmap(ru) .. ";" .. escape_langmap(en),
 }, ",")
 
--- после старта: поиск clipboard-провайдера не тормозит запуск
 vim.schedule(function()
 	opt.clipboard = "unnamedplus"
 end)

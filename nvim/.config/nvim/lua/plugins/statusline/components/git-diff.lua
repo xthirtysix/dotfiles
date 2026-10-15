@@ -1,5 +1,3 @@
-local conditions = require("heirline.conditions")
-
 local function count_item(key, icon, color)
 	return {
 		condition = function(self)
@@ -24,12 +22,8 @@ local function compact_item(key, color)
 	}
 end
 
--- без правого капа, он теперь снаружи
 local function wrap(children)
 	return {
-		condition = function(self)
-			return self.has_changes
-		end,
 		{
 			provider = "█",
 			hl = function(self)
@@ -46,16 +40,15 @@ local function wrap(children)
 end
 
 local GitDiff = {
-	-- содержимое: только в git-репозитории и при наличии изменений
+	condition = function(self)
+		return self.has_git_changes
+	end,
+
+	init = function(self)
+		self.status_dict = vim.b.gitsigns_status_dict
+	end,
+
 	{
-		condition = conditions.is_git_repo,
-
-		init = function(self)
-			local d = vim.b.gitsigns_status_dict or {}
-			self.status_dict = d
-			self.has_changes = ((d.added or 0) + (d.removed or 0) + (d.changed or 0)) > 0
-		end,
-
 		flexible = 1,
 		wrap({
 			count_item("added", " ", "git_add"),

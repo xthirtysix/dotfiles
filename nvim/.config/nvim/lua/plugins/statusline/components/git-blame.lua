@@ -1,4 +1,3 @@
--- сообщение последнего коммита для строки под курсором; данные даёт gitsigns current_line_blame
 local blame_state = require("plugins.statusline.git-blame-state")
 local gitmoji = require("plugins.statusline.gitmoji")
 
@@ -25,7 +24,6 @@ end
 local function body(format)
 	return {
 		edge("\u{e0b6}"),
-		-- правого края нет: pill пристыковывается к блоку LSP
 		{
 			provider = function(self)
 				return format(self) .. " "
@@ -40,7 +38,6 @@ end
 local UNCOMMITTED_ICON = "\u{f448}"
 local UNCOMMITTED_LABEL = { add = "added", change = "changed" }
 
---- @return { icon: string, full: string, short: string } варианты текста для flexible
 local function commit_texts(info)
 	local summary = truncate(gitmoji.emojify(info.summary), MAX_SUMMARY_WIDTH)
 	local date = os.date(DATE_FORMAT, tonumber(info.author_time) or 0)
@@ -91,7 +88,6 @@ local GitBlame = {
 	body(function(self)
 		return self.texts.icon .. " " .. self.texts.short
 	end),
-	-- на узком окне остаётся только иконка: блок не исчезает, чтобы стык с LSP оставался корректным
 	body(function(self)
 		return self.texts.icon
 	end),

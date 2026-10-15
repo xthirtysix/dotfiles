@@ -105,6 +105,11 @@ function M.init_has_git(self)
 	self.has_git = vim.b.gitsigns_status_dict ~= nil
 end
 
+function M.init_git_changes(self)
+	local d = vim.b.gitsigns_status_dict or {}
+	self.has_git_changes = ((d.added or 0) + (d.removed or 0) + (d.changed or 0)) > 0
+end
+
 function M.init_colors(self)
 	local name = M.mode_colors[vim.fn.mode(1):sub(1, 1)] or "gray"
 	self.color_bright = name

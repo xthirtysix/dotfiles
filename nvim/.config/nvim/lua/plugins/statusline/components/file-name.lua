@@ -10,7 +10,6 @@ local function variant(field)
 end
 
 local FileName = {
-	-- без update: init дешёвый, а разделитель должен сразу реагировать на подключение gitsigns
 	init = function(self)
 		local head = vim.b.gitsigns_head
 		self.has_git = head ~= nil and head ~= ""
@@ -42,7 +41,7 @@ local FileName = {
 		end,
 		provider = "",
 		hl = function(self)
-			return { fg = self.color_bright, bg = self.color_dark }
+			return { fg = self.color_bright, bg = "NONE" }
 		end,
 	},
 	{

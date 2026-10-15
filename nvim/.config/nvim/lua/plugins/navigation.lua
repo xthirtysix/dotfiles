@@ -1,5 +1,4 @@
 return {
-	-- единый набор иконок; плагины, ждущие nvim-web-devicons, получают mock от mini.icons
 	{
 		"nvim-mini/mini.icons",
 		lazy = true,
@@ -20,7 +19,6 @@ return {
 			"nvim-mini/mini.icons",
 		},
 
-		-- netrw отключён: `nvim <dir>` должен сразу открывать mini.files
 		init = function()
 			if vim.fn.argc(-1) == 1 and vim.fn.isdirectory(vim.fn.argv(0)) == 1 then
 				require("lazy").load({ plugins = { "mini.files" } })
@@ -66,7 +64,7 @@ return {
 
 		keys = {
 			{
-				"s",
+				"<leader>j",
 				mode = { "n", "x", "o" },
 				function()
 					require("flash").jump()
@@ -74,7 +72,7 @@ return {
 				desc = "Flash jump",
 			},
 			{
-				"S",
+				"<leader>J",
 				mode = { "n", "x", "o" },
 				function()
 					require("flash").treesitter()

@@ -3,6 +3,15 @@ return {
 	event = "VeryLazy",
 	dependencies = { "nvim-mini/mini.icons" },
 
+	init = function()
+		vim.api.nvim_create_autocmd("ModeChanged", {
+			group = vim.api.nvim_create_augroup("HeirlineModeRedraw", { clear = true }),
+			callback = vim.schedule_wrap(function()
+				vim.cmd("redrawstatus")
+			end),
+		})
+	end,
+
 	config = function()
 		local heirline = require("heirline")
 		local utils = require("plugins.statusline.heirline-utils")
@@ -25,6 +34,7 @@ return {
 				init = function(self)
 					utils.init_mode(self)
 					utils.init_has_git(self)
+					utils.init_git_changes(self)
 					utils.init_colors(self)
 				end,
 				hl = { bg = "NONE" },

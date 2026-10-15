@@ -1,5 +1,4 @@
 local Git = {
-	-- ветку берём у gitsigns: без запуска git и согласованно с остальными компонентами
 	condition = function(self)
 		self.head = vim.b.gitsigns_head
 		return self.head ~= nil and self.head ~= ""
@@ -35,7 +34,7 @@ local Git = {
 		{
 			provider = "█",
 			hl = function(self)
-				return { fg = self.color_bright, bg = self.color_dark }
+				return { fg = self.color_bright, bg = self.has_git_changes and self.color_dark or "NONE" }
 			end,
 		},
 	},

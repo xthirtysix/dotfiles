@@ -39,6 +39,15 @@ return {
 						})
 						:map("<leader>ud")
 
+					local lsp_state = require("plugins.statusline.lsp-state")
+					Snacks.toggle
+						.new({
+							name = "LSP in statusline",
+							get = lsp_state.enabled,
+							set = lsp_state.set,
+						})
+						:map("<leader>ul")
+
 					Snacks.toggle.indent():map("<leader>ug")
 					Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>uw")
 					Snacks.toggle.option("relativenumber", { name = "Relative number" }):map("<leader>uL")
@@ -100,7 +109,7 @@ return {
 			},
 			-- pickers
 			{
-				"<leader>sf",
+				"<leader><leader>",
 				function()
 					Snacks.picker.files()
 				end,
