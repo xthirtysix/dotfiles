@@ -12,8 +12,6 @@ opt.showmode = false
 opt.laststatus = 3
 opt.winborder = "rounded"
 
-require("core.ui2")
-
 opt.expandtab = true
 opt.shiftwidth = 2
 opt.tabstop = 2
