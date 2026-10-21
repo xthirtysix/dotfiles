@@ -10,6 +10,22 @@ return {
 				ui_select = true,
 			},
 
+			-- Минималистичный стартовый экран: недавние файлы + пара действий
+			dashboard = {
+				enabled = true,
+				preset = {
+					keys = {
+						{ key = "f", desc = "Find file", action = ":lua Snacks.picker.files()" },
+						{ key = "q", desc = "Quit", action = ":qa" },
+					},
+				},
+				sections = {
+					{ title = "Recent files", padding = 1 },
+					{ section = "recent_files", limit = 8, padding = 1 },
+					{ section = "keys" },
+				},
+			},
+
 			lazygit = { enabled = true },
 			gitbrowse = { enabled = true },
 
