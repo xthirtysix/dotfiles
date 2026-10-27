@@ -51,7 +51,9 @@ vim.lsp.enable({
 	"vtsls",
 	"vue_ls",
 	"eslint",
+	"biome", -- стартует только в проектах с biome.json
 	"cssls",
+	"stylelint_lsp", -- стартует только в проектах с конфигом stylelint
 	"emmet_language_server",
 	"yamlls",
 	"gopls",

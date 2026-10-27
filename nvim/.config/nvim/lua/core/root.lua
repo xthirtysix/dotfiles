@@ -57,6 +57,36 @@ function M.bin(name, bufnr)
 	return M.up(start_dir(bufnr), "node_modules/.bin/" .. name)
 end
 
+local BIOME_CONFIGS = { "biome.json", "biome.jsonc" }
+local BIOME_PACKAGE = "@biomejs/biome"
+
+local function package_uses_biome(path)
+	local ok, lines = pcall(vim.fn.readfile, path)
+	return ok and table.concat(lines, "\n"):find(BIOME_PACKAGE, 1, true) ~= nil
+end
+
+-- корень biome-проекта: biome.json(c) или @biomejs/biome в ближайшем package.json вверх по дереву
+local function biome_root(bufnr)
+	local config_root = find(bufnr, { BIOME_CONFIGS })
+	if config_root then
+		return config_root
+	end
+	local packages = vim.fs.find("package.json", { path = start_dir(bufnr), upward = true, limit = math.huge })
+	for _, path in ipairs(packages) do
+		if package_uses_biome(path) then
+			return vim.fs.dirname(path)
+		end
+	end
+end
+
+-- корень проекта с biome, если сам бинарник доступен (иначе nil -> prettier)
+function M.biome(bufnr)
+	local root = biome_root(bufnr)
+	if root and (M.bin("biome", bufnr) or vim.fn.executable("biome") == 1) then
+		return root
+	end
+end
+
 function M.tsdk(dir)
 	return M.up(dir, "node_modules/typescript/lib")
 end
@@ -67,6 +97,8 @@ vim.api.nvim_create_user_command("ProjectTools", function()
 		ts_root = M.ts(0),
 		workspace = M.workspace(0),
 		tsdk = M.tsdk(M.ts(0) or start_dir(0)),
+		biome_root = M.biome(0),
+		biome = M.bin("biome", 0),
 		prettier = M.bin("prettier", 0),
 		eslint = M.bin("eslint", 0),
 	})

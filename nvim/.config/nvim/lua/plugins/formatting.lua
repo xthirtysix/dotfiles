@@ -1,3 +1,8 @@
+-- biome в проекте с biome.json и доступным бинарником (format + safe lint fixes + organize imports), иначе prettier
+local function biome_or_prettier(bufnr)
+	return require("core.root").biome(bufnr) and { "biome-check" } or { "prettier" }
+end
+
 return {
 	{
 		"stevearc/conform.nvim",
@@ -25,20 +30,20 @@ return {
 
 				go = { "goimports", "gofumpt" },
 
-				javascript = { "prettier" },
-				javascriptreact = { "prettier" },
-				typescript = { "prettier" },
-				typescriptreact = { "prettier" },
+				javascript = biome_or_prettier,
+				javascriptreact = biome_or_prettier,
+				typescript = biome_or_prettier,
+				typescriptreact = biome_or_prettier,
 
 				vue = { "prettier" },
 
 				html = { "prettier" },
 
-				css = { "prettier" },
-				scss = { "prettier" },
+				css = biome_or_prettier,
+				scss = biome_or_prettier,
 
-				json = { "prettier" },
-				jsonc = { "prettier" },
+				json = biome_or_prettier,
+				jsonc = biome_or_prettier,
 
 				yaml = { "prettier" },
 				markdown = { "prettier" },
